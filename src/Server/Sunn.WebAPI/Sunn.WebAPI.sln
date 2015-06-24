@@ -1,0 +1,32 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.22609.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{C60FD60A-759C-4254-B22D-F665D4B9ADEE}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{BCBAB87F-36D3-421D-83CD-6BA6F899E72D}"
+	ProjectSection(SolutionItems) = preProject
+		global.json = global.json
+	EndProjectSection
+EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Sunn.WebAPI", "src\Sunn.WebAPI\Sunn.WebAPI.kproj", "{D17E23B2-DFDE-48DB-B07A-C43AD3D719AD}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D17E23B2-DFDE-48DB-B07A-C43AD3D719AD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D17E23B2-DFDE-48DB-B07A-C43AD3D719AD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D17E23B2-DFDE-48DB-B07A-C43AD3D719AD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D17E23B2-DFDE-48DB-B07A-C43AD3D719AD}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{D17E23B2-DFDE-48DB-B07A-C43AD3D719AD} = {C60FD60A-759C-4254-B22D-F665D4B9ADEE}
+	EndGlobalSection
+EndGlobal
