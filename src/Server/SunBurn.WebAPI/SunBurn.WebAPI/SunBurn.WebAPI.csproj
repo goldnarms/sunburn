@@ -198,8 +198,10 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
     <Compile Include="Controllers\AccountController.cs" />
-    <Compile Include="Controllers\CalculatorController.cs" />
+    <Compile Include="Controllers\SpfController.cs" />
+    <Compile Include="Controllers\TimeToSunburnController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\UvIndexController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -210,6 +212,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Providers\ApplicationOAuthProvider.cs" />
     <Compile Include="Results\ChallengeResult.cs" />
+    <Compile Include="Services\UvIndexService.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -282,6 +285,14 @@
     <ProjectReference Include="..\SunBurn.BLL\SunBurn.BLL.csproj">
       <Project>{2753913e-90ed-49ea-9b84-66270682e782}</Project>
       <Name>SunBurn.BLL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SunBurn.FakeServices\SunBurn.FakeServices.csproj">
+      <Project>{61105866-c854-485a-8b8c-5a926cc566c1}</Project>
+      <Name>SunBurn.FakeServices</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SunBurn.Interfaces\SunBurn.Interfaces.csproj">
+      <Project>{ee66808c-44df-441a-8a96-bf8fc315bf50}</Project>
+      <Name>SunBurn.Interfaces</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
