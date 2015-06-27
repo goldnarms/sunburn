@@ -1,6 +1,15 @@
 ﻿<Properties StartupItem="SunBurn\SunBurn.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Droid\Services\LocationMngr.cs">
+    <Files>
+      <File FileName="Droid\MainActivity.cs" Line="23" Column="4" />
+      <File FileName="SunBurn\SunBurn.cs" Line="34" Column="3" />
+      <File FileName="SunBurn\Services\DataService.cs" Line="3" Column="12" />
+      <File FileName="..\..\..\Server\SunBurn.WebAPI\SunBurn.BLL\Types\Response.cs" Line="7" Column="11" />
+      <File FileName="SunBurn\Interfaces\ILocationManager.cs" Line="6" Column="3" />
+      <File FileName="Droid\Services\LocationMngr.cs" Line="14" Column="63" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
