@@ -1,5 +1,5 @@
 ﻿using System;
-
+using SunBurn.Pages;
 using Xamarin.Forms;
 
 namespace SunBurn
@@ -9,21 +9,18 @@ namespace SunBurn
 		public App ()
 		{
 			// The root page of your application
-			MainPage = new ContentPage {
-				Content = new StackLayout {
-					VerticalOptions = LayoutOptions.Center,
-					Children = {
-						new Label {
-							XAlign = TextAlignment.Center,
-							Text = "Welcome to Xamarin Forms!"
-						}
-					}
-				}
-			};
+			// Check if user has set skin type
+			if(Settings.SkinTypeSetting == SunBurn.BLL.Types.SkinType.NotSet)
+				MainPage = new FrontPage ();
+			else
+				MainPage = new FrontPage();
+
+			AppStart ();
 		}
 
 		protected override void OnStart ()
 		{
+			//var locationManager = S
 			// Handle when your app starts
 		}
 
@@ -35,6 +32,9 @@ namespace SunBurn
 		protected override void OnResume ()
 		{
 			// Handle when your app resumes
+		}
+
+		private void AppStart(){
 		}
 	}
 }

@@ -8,6 +8,7 @@ namespace SunBurn.BLL.Types
 {
     public enum SkinType
     {
+		NotSet,
         VeryLight,
         Light,
         Medium,

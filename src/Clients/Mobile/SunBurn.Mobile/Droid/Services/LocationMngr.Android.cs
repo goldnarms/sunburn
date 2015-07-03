@@ -1,8 +1,10 @@
 ﻿using System;
 using Android.Locations;
 using Android.Content;
+using Xamarin.Forms;
 
-namespace SunBurn.Droid
+[assembly:Dependency(typeof(SunBurn.Droid.Services.LocationMngr))]
+namespace SunBurn.Droid.Services
 {
 	public class LocationMngr :ILocationManager
 	{

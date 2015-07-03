@@ -8,7 +8,7 @@ using Newtonsoft.Json;
 
 namespace SunBurn
 {
-	public class DataService
+	public class DataService : IDataService
 	{
 		private const string Url = "";
 		public DataService ()
@@ -21,7 +21,7 @@ namespace SunBurn
 			return client;
 		}
 
-		public async Task<SunBurn.BLL.Types.Response> GetData(){
+		public async Task<SunBurn.BLL.Types.Response> GetData(Tuple<double, double, double> position, double spf, BLL.Types.SkinType skinType){
 			var client = await GetClient ();
 			var result = await client.GetStringAsync (Url);
 			return JsonConvert.DeserializeObject<SunBurn.BLL.Types.Response>(result);
