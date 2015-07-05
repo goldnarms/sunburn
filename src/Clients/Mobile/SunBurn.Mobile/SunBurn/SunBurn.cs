@@ -1,5 +1,4 @@
 ﻿using System;
-using SunBurn.Pages;
 using Xamarin.Forms;
 
 namespace SunBurn
@@ -9,11 +8,6 @@ namespace SunBurn
 		public App ()
 		{
 			// The root page of your application
-			// Check if user has set skin type
-			if(Settings.SkinTypeSetting == SunBurn.BLL.Types.SkinType.NotSet)
-				MainPage = new FrontPage ();
-			else
-				MainPage = new FrontPage();
 
 			AppStart ();
 		}
@@ -35,6 +29,11 @@ namespace SunBurn
 		}
 
 		private void AppStart(){
+			// Check if user has set skin type
+			if(Settings.SkinTypeSetting == SkinType.NotSet)
+				MainPage = new NavigationPage (new SetSkintypePage());
+			else
+				MainPage = new NavigationPage (new FrontPage());
 		}
 	}
 }

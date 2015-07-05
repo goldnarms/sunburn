@@ -5,7 +5,7 @@ namespace SunBurn
 {
 	public interface IDataService
 	{
-		Task<SunBurn.BLL.Types.Response> GetData(Tuple<double, double, double> position, double spf, BLL.Types.SkinType skinType);
+		WeatherData GetWeatherData (Tuple<double, double> position, DateTime time);
 	}
 }
 

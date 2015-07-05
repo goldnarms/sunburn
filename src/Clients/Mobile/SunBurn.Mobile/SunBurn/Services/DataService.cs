@@ -15,16 +15,24 @@ namespace SunBurn
 		{
 		}
 			
-		private async Task<HttpClient> GetClient(){
+		private HttpClient GetClient(){
 			HttpClient client = new HttpClient (new NativeMessageHandler ());
 			client.DefaultRequestHeaders.Add ("Accept", "application/json");
 			return client;
 		}
 
-		public async Task<SunBurn.BLL.Types.Response> GetData(Tuple<double, double, double> position, double spf, BLL.Types.SkinType skinType){
-			var client = await GetClient ();
-			var result = await client.GetStringAsync (Url);
-			return JsonConvert.DeserializeObject<SunBurn.BLL.Types.Response>(result);
+		public WeatherData GetWeatherData(Tuple<double, double> position, DateTime time){
+			var weatherData = new WeatherData {
+				Celsius = 33,
+				Fahrenheit = 58,
+				LocationName = "Bangkok",
+				UvIndex = 12
+			};
+			return weatherData;
+//			var client = GetClient ();
+//			var result = await client.GetStringAsync (Url);
+//			
+//			return JsonConvert.DeserializeObject<Response>(result);
 		}
 	}
 }

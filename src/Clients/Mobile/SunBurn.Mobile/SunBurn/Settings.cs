@@ -13,15 +13,14 @@ namespace SunBurn
 			}
 		}
 
-		public static BLL.Types.SkinType SkinTypeSetting
+		public static SkinType SkinTypeSetting
 		{
 			get
 			{
-				return (BLL.Types.SkinType)AppSettings.GetValueOrDefault("skin_type", (int)0);
+				return (SkinType)AppSettings.GetValueOrDefault("skin_type", (int)0);
 			}
 			set
 			{
-				//if value has changed then save it!
 				AppSettings.AddOrUpdateValue("skin_type", (int)value);
 			}
 		}
