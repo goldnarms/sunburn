@@ -1,10 +1,10 @@
 ﻿<Properties StartupItem="SunBurn\SunBurn.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="..\..\..\..\..\..\..\..\..\Program Files (x86)\MSBuild\Xamarin\Android\Xamarin.Android.Common.targets">
+  <MonoDevelop.Ide.Workbench ActiveDocument="SunBurn\Helpers\Settings.cs">
     <Files>
       <File FileName="Droid\MainActivity.cs" Line="1" Column="1" />
       <File FileName="SunBurn\SunBurn.cs" Line="1" Column="1" />
-      <File FileName="SunBurn\Services\DataService.cs" Line="24" Column="95" />
+      <File FileName="SunBurn\Services\DataService.cs" Line="1" Column="1" />
       <File FileName="..\..\..\Server\SunBurn.WebAPI\SunBurn.BLL\Types\Response.cs" Line="1" Column="1" />
       <File FileName="SunBurn\Interfaces\ILocationManager.cs" Line="1" Column="1" />
       <File FileName="Droid\Services\LocationMngr.Android.cs" Line="1" Column="1" />
@@ -12,6 +12,7 @@
       <File FileName="SunBurn\Managers\FrontPageManager.cs" Line="1" Column="1" />
       <File FileName="SunBurn\Interfaces\IDataService.cs" Line="1" Column="1" />
       <File FileName="..\..\..\..\..\..\..\..\..\Program Files (x86)\MSBuild\Xamarin\Android\Xamarin.Android.Common.targets" Line="290" Column="39" />
+      <File FileName="SunBurn\Helpers\Settings.cs" Line="2" Column="7" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
