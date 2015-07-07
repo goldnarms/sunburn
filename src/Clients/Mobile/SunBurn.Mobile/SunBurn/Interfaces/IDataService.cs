@@ -5,7 +5,8 @@ namespace SunBurn
 {
 	public interface IDataService
 	{
-		WeatherData GetWeatherData (Tuple<double, double> position, DateTime time);
+		Task<WeatherResponse> GetWeatherData (Tuple<double, double> position);
+		Task<LocationResponse> GetLocationName (Tuple<double, double> position);
 	}
 }
 

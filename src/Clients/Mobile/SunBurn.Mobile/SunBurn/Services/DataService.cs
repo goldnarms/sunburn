@@ -10,7 +10,10 @@ namespace SunBurn
 {
 	public class DataService : IDataService
 	{
-		private const string Url = "";
+		private string EndpointUrl = "http://api.worldweatheronline.com/premium/v1/weather.ashx?key={0}&q={1},{2}&num_of_days=3&tp=3&format=json";
+		private const string Key = "e748e42e457095f423044e0f7e693";
+		private const string GeoCodingKey = "AIzaSyDzsUSC9losX41le-_lE6cEt9VgPgydFBQ";
+		private string GeoCodingUrl = "https://maps.googleapis.com/maps/api/geocode/json?latlng={0},{1}&key={2}";
 		public DataService ()
 		{
 		}
@@ -21,18 +24,18 @@ namespace SunBurn
 			return client;
 		}
 
-		public WeatherData GetWeatherData(Tuple<double, double> position, DateTime time){
-			var weatherData = new WeatherData {
-				Celsius = 33,
-				Fahrenheit = 58,
-				LocationName = "Bangkok",
-				UvIndex = 12
-			};
-			return weatherData;
-//			var client = GetClient ();
-//			var result = await client.GetStringAsync (Url);
-//			
-//			return JsonConvert.DeserializeObject<Response>(result);
+		public async Task<WeatherResponse> GetWeatherData(Tuple<double, double> position){
+			var client = GetClient ();
+			var result = await client.GetStringAsync (string.Format(EndpointUrl, Key, position.Item1, position.Item2));
+			
+			return JsonConvert.DeserializeObject<WeatherResponse>(result);
+		}
+
+		public async Task<LocationResponse> GetLocationName(Tuple<double, double> position){
+			var client = GetClient ();
+			var result = await client.GetStringAsync (string.Format(GeoCodingUrl, GeoCodingKey, position.Item1, position.Item2));
+
+			return JsonConvert.DeserializeObject<LocationResponse>(result);
 		}
 	}
 }

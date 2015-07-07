@@ -10,7 +10,7 @@ namespace SunBurn
     {
         public string Location { get; set; }
 
-		public Dictionary<DateTime, SunburnResult> SunburnResults { get; set; }
+		public Dictionary<string, SunburnResult> SunburnResults { get; set; }
     }
 
 	public class SunburnResult

@@ -23,28 +23,26 @@ namespace SunBurn.Managers
 			return _locationMngr.GetLocation();
 		}
 
-		public TimeToSunburnResult GetResult(Tuple<double, double, double> position){
+		public async TimeToSunburnResult GetResult(Tuple<double, double, double> position){
 			var result = new TimeToSunburnResult {
 				SunburnResults = new Dictionary<DateTime, SunburnResult>()
 			};
-			var currentTime = DateTime.Now;
-			for (int i = 0; i < 3; i++) {
-				var weatherData = _dataService.GetWeatherData(new Tuple<double, double>(position.Item1, position.Item2), currentTime.AddDays(i));
-				if (i == 0) {
-					result.Location = weatherData.LocationName;
-				}
+			var locationData = await _dataService.GetLocationName (new Tuple<double, double> (position.Item1, position.Item2));
+			var weatherData = await _dataService.GetWeatherData(new Tuple<double, double>(position.Item1, position.Item2));
+			result.Location = locationData.results.Count() > 0 ? locationData.results.First ().address_components.Where (a => a.types.Contains ("administrative_area_level_2") || a.types.Contains ("administrative_area_level_2")).First ().short_name : "";
+			foreach (var weatherResult in weatherData.data.weather) {
+				var hourIndex = DateTime.Now.Hour;
 				var sunburnResult = new SunburnResult();
-				sunburnResult.Celcius = weatherData.Celsius;
-				sunburnResult.Fahrenheit = weatherData.Fahrenheit;
-				sunburnResult.UvIndex = weatherData.UvIndex;
+
+				sunburnResult.Celcius = weatherResult.hourly[hourIndex].tempC;
+				sunburnResult.Fahrenheit = weatherResult.hourly[hourIndex].tempF;
+				sunburnResult.UvIndex = weatherResult.uvIndex;
 				sunburnResult.SpfTable = new List<SpfTime> ();
 				foreach (var spf in _sunProtectionFactors) {
-					var timeToSunburnResult = _exposureCalculator.CalculateTimeToSunburn (Settings.SkinTypeSetting, weatherData.UvIndex, spf, position.Item3, false);
+					var timeToSunburnResult = _exposureCalculator.CalculateTimeToSunburn (Settings.SkinTypeSetting, weatherResult.uvIndex, spf, position.Item3, false);
 					sunburnResult.SpfTable.Add(new SpfTime{Spf = spf, Time = timeToSunburnResult});
 				}
-				result.SunburnResults = new Dictionary<DateTime, SunburnResult> {
-					{ currentTime.AddDays(i), sunburnResult}
-				};
+				result.SunburnResults.Add (weatherResult.date, sunburnResult);
 			}
 			return result; 
 		}
