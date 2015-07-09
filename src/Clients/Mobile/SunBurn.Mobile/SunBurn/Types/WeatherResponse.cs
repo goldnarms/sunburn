@@ -28,8 +28,8 @@ namespace SunBurn
         public string observation_time { get; set; }
         public string precipMM { get; set; }
         public string pressure { get; set; }
-        public string temp_C { get; set; }
-        public string temp_F { get; set; }
+		public double temp_C { get; set; }
+        public double temp_F { get; set; }
         public string visibility { get; set; }
         public string weatherCode { get; set; }
         public Weatherdesc[] weatherDesc { get; set; }
@@ -65,7 +65,7 @@ namespace SunBurn
         public string maxtempF { get; set; }
         public string mintempC { get; set; }
         public string mintempF { get; set; }
-        public string uvIndex { get; set; }
+		public double uvIndex { get; set; }
     }
 
     public class Astronomy
@@ -98,8 +98,8 @@ namespace SunBurn
         public string humidity { get; set; }
         public string precipMM { get; set; }
         public string pressure { get; set; }
-        public string tempC { get; set; }
-        public string tempF { get; set; }
+        public double tempC { get; set; }
+        public double tempF { get; set; }
         public string time { get; set; }
         public string visibility { get; set; }
         public string weatherCode { get; set; }

@@ -10,7 +10,7 @@ namespace SunBurn.Droid.Services
 	{
 		const string Provider = LocationManager.GpsProvider;
 		private readonly LocationManager _locMgr;
-		private Location _currentLocation;
+		private Android.Locations.Location _currentLocation;
 		public LocationMngr ()
 		{
 			_locMgr = Android.App.Application.Context.GetSystemService(Context.LocationService) as LocationManager;
@@ -24,7 +24,7 @@ namespace SunBurn.Droid.Services
 			}
 		}
 
-		public void OnLocationChanged(Location location){
+		public void OnLocationChanged(Android.Locations.Location location){
 			_currentLocation = location;
 		}
 

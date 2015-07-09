@@ -26,8 +26,9 @@ namespace SunBurn.Calculators
         public TimeSpan CalculateTimeToSunburn(SkinType skinType, double uvIndex, double spfFactor, double altitude, bool inWater)
         {
             var uvWithAlt = uvIndex * (1 + (altitude * 0.0016)) * (inWater ? 1.5 : 1);
-            
-            return TimeSpan.FromMinutes((_factorTable[skinType] / uvWithAlt) * spfFactor);
+			if (spfFactor > 0)
+				return TimeSpan.FromMinutes (spfFactor / ((_factorTable [skinType] / uvWithAlt) * -1));
+			return TimeSpan.FromMinutes (((_factorTable [skinType] / uvWithAlt) * -1));
         }
 
         public double CalculateSpf(SkinType skinType, double uvIndex, double altitude, bool inWater, TimeSpan timeInSun)

@@ -12,14 +12,19 @@ namespace SunBurn
 		private FrontPageManager _manager;
 		public FrontPage (){
 			_manager = new FrontPageManager (DependencyService.Get<ILocationManager>(), new DataService(), new ExposureCalculator());
+			Init ();
+		}
+
+		private async void Init(){
 			var location = _manager.GetCurrentLocation ();
-			var result = _manager.GetResult (location);
+			var result = await _manager.GetResult (location);
 
 			Content = BuildContent(result.Location, result.SunburnResults.First().Key, result.SunburnResults.First().Value);
 			Padding = new Thickness(10, Device.OnPlatform(20, 0, 0), 10, 5);
+
 		}
 
-		private View BuildContent(string locationName, DateTime time, SunburnResult sunburnResult){
+		private View BuildContent(string locationName, string time, SunburnResult sunburnResult){
 			var locationLbl = new Label {
 				Text = locationName,
 				VerticalOptions = LayoutOptions.Start,
@@ -27,7 +32,7 @@ namespace SunBurn
 			};
 
 			var dateLbl = new Label {
-				Text = time.ToString ("dddd"),
+				Text = time,
 				HorizontalOptions = LayoutOptions.CenterAndExpand
 			};
 
@@ -56,18 +61,21 @@ namespace SunBurn
 						Text = "Duration"
 					};
 
-					return new ViewCell{
-						View = new StackLayout{
+					return new StackLayout{
 							Orientation = StackOrientation.Horizontal,
 							Children = { spfHeaderLbl, timeHeaderLbl}
-						}
 					};
 				}),
 				ItemTemplate = new DataTemplate(() => {
-					Label spfLbl = new Label();
+					Label spfLbl = new Label{
+						HorizontalOptions = LayoutOptions.Center,
+
+					};
 					spfLbl.SetBinding(Label.TextProperty, "Spf");
 
-					Label timeLbl = new Label();
+					Label timeLbl = new Label{
+						HorizontalOptions = LayoutOptions.Center,
+					};
 					timeLbl.SetBinding(Label.TextProperty, "Time");
 
 					return new ViewCell{
@@ -81,7 +89,7 @@ namespace SunBurn
 			return new StackLayout {
 				VerticalOptions = LayoutOptions.Center,
 				Children = {
-					locationLbl, uvLayout, sunBurnTable
+					locationLbl, dateLbl, uvLayout, sunBurnTable
 				}
 			};
 		}

@@ -1,35 +1,27 @@
-﻿<Properties StartupItem="Droid\SunBurn.Droid.csproj">
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Android.MonoForAndroid_API_15" />
-  <MonoDevelop.Ide.Workbench>
-    <Pads>
-      <Pad Id="ProjectPad">
-        <State name="__root__">
-          <Node name="SunBurn.Mobile" expanded="True">
-            <Node name="SunBurn" expanded="True">
-              <Node name="Calculators" expanded="True" />
-              <Node name="Interfaces" expanded="True" />
-              <Node name="Managers" expanded="True" />
-              <Node name="Pages" expanded="True" />
-              <Node name="Services" expanded="True" />
-              <Node name="Types" expanded="True" />
-            </Node>
-            <Node name="SunBurn.Droid" expanded="True">
-              <Node name="Services" expanded="True" />
-              <Node name="MainActivity.cs" selected="True" />
-            </Node>
-            <Node name="SunBurn.UITests" expanded="True" />
-          </Node>
-        </State>
-      </Pad>
-      <Pad Id="MonoDevelop.NUnit.TestPad">
-        <State name="__root__">
-          <Node name="SunBurn.Mobile" expanded="True" selected="True" />
-        </State>
-      </Pad>
-    </Pads>
+﻿<Properties StartupItem="SunBurn.IOS/SunBurn.IOS.csproj">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.IPhone.IPhoneSimulatorTarget.IPhone5s.8.3" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="SunBurn.IOS/Services/LocationMngr.IOS.cs">
+    <Files>
+      <File FileName="SunBurn.IOS/AppDelegate.cs" Line="15" Column="1" />
+      <File FileName="Droid/MainActivity.cs" Line="1" Column="1" />
+      <File FileName="SunBurn/Settings.cs" Line="23" Column="1" />
+      <File FileName="SunBurn/SunBurn.cs" Line="43" Column="1" />
+      <File FileName="SunBurn.IOS/Main.cs" Line="1" Column="1" />
+      <File FileName="SunBurn/Managers/FrontPageManager.cs" Line="22" Column="3" />
+      <File FileName="SunBurn/Pages/FrontPage.cs" Line="19" Column="38" />
+      <File FileName="SunBurn/Types/WeatherResponse.cs" Line="1" Column="1" />
+      <File FileName="Droid/Services/LocationMngr.Android.cs" Line="31" Column="1" />
+      <File FileName="SunBurn/Types/LocationResponse.cs" Line="1" Column="1" />
+      <File FileName="SunBurn.IOS/Services/LocationMngr.IOS.cs" Line="40" Column="2" />
+      <File FileName="SunBurn/Pages/SetSkintypePage.cs" Line="1" Column="1" />
+    </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
-    <BreakpointStore />
+    <BreakpointStore>
+      <Breakpoint file="/Users/arnsteinjohansen/Documents/sunburn/src/Clients/Mobile/SunBurn.Mobile/SunBurn.IOS/Services/LocationMngr.IOS.cs" line="15" column="1" />
+      <Breakpoint file="/Users/arnsteinjohansen/Documents/sunburn/src/Clients/Mobile/SunBurn.Mobile/SunBurn/Pages/FrontPage.cs" line="14" column="1" />
+      <Breakpoint file="/Users/arnsteinjohansen/Documents/sunburn/src/Clients/Mobile/SunBurn.Mobile/SunBurn/Settings.cs" line="20" column="1" />
+    </BreakpointStore>
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
 </Properties>

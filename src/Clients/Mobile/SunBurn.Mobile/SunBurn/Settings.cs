@@ -17,11 +17,14 @@ namespace SunBurn
 		{
 			get
 			{
-				return (SkinType)AppSettings.GetValueOrDefault("skin_type", (int)0);
+				var skinType = AppSettings.GetValueOrDefault("skin_type", (int)0);
+				var stEnum = (SkinType)skinType;
+				return stEnum;
 			}
 			set
 			{
-				AppSettings.AddOrUpdateValue("skin_type", (int)value);
+				var skinType = (int)value;
+				AppSettings.AddOrUpdateValue("skin_type", skinType);
 			}
 		}
 	}

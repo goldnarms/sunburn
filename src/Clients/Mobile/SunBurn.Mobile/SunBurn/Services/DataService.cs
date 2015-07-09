@@ -10,7 +10,7 @@ namespace SunBurn
 {
 	public class DataService : IDataService
 	{
-		private string EndpointUrl = "http://api.worldweatheronline.com/premium/v1/weather.ashx?key={0}&q={1},{2}&num_of_days=3&tp=3&format=json";
+		private string EndpointUrl = "http://api.worldweatheronline.com/free/v2/weather.ashx?key={0}&q={1},{2}&num_of_days=3&tp=3&format=json";
 		private const string Key = "e748e42e457095f423044e0f7e693";
 		private const string GeoCodingKey = "AIzaSyDzsUSC9losX41le-_lE6cEt9VgPgydFBQ";
 		private string GeoCodingUrl = "https://maps.googleapis.com/maps/api/geocode/json?latlng={0},{1}&key={2}";
@@ -33,7 +33,7 @@ namespace SunBurn
 
 		public async Task<LocationResponse> GetLocationName(Tuple<double, double> position){
 			var client = GetClient ();
-			var result = await client.GetStringAsync (string.Format(GeoCodingUrl, GeoCodingKey, position.Item1, position.Item2));
+			var result = await client.GetStringAsync (string.Format(GeoCodingUrl, position.Item1, position.Item2, GeoCodingKey));
 
 			return JsonConvert.DeserializeObject<LocationResponse>(result);
 		}

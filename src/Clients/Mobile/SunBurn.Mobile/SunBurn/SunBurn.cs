@@ -1,10 +1,12 @@
 ﻿using System;
 using Xamarin.Forms;
+using Connectivity.Plugin;
 
 namespace SunBurn
 {
 	public class App : Application
 	{
+		Page page;
 		public App ()
 		{
 			// The root page of your application
@@ -29,12 +31,25 @@ namespace SunBurn
 		}
 
 		private void AppStart(){
+//			MainPage = new ContentPage {
+//				Content = new Label {
+//					Text = "Test"
+//				}
+//			};
 			// Check if user has set skin type
 			if(Settings.SkinTypeSetting == SkinType.NotSet)
-				MainPage = new NavigationPage (new SetSkintypePage());
+				page = MainPage = new NavigationPage (new SetSkintypePage());
 			else
-				MainPage = new NavigationPage (new FrontPage());
+				page = MainPage = new NavigationPage (new FrontPage());
+
+			CrossConnectivity.Current.ConnectivityChanged += (sender, args) =>
+			{
+				if(!args.IsConnected)
+					page.DisplayAlert("Connect to internet", "Please connect to internet", "OK");
+			};
 		}
+
+
 	}
 }
 

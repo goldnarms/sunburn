@@ -57,7 +57,7 @@ namespace SunBurn
 			_btnOk.Clicked += OnButtonClicked;
 
 			return new StackLayout{
-				Children = {label, _picker}
+				Children = {label, _picker, _btnOk}
 			};
 		}
 
