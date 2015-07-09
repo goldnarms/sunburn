@@ -31,16 +31,8 @@ namespace SunBurn
 		}
 
 		private void AppStart(){
-//			MainPage = new ContentPage {
-//				Content = new Label {
-//					Text = "Test"
-//				}
-//			};
-			// Check if user has set skin type
-			if(Settings.SkinTypeSetting == SkinType.NotSet)
-				page = MainPage = new NavigationPage (new SetSkintypePage());
-			else
-				page = MainPage = new NavigationPage (new FrontPage());
+				
+			page = MainPage = new RootPage ();
 
 			CrossConnectivity.Current.ConnectivityChanged += (sender, args) =>
 			{
