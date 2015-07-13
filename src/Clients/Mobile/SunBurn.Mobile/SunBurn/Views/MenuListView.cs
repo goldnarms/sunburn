@@ -14,11 +14,12 @@ namespace SunBurn
 			ItemsSource = data;
 			VerticalOptions = LayoutOptions.FillAndExpand;
 			BackgroundColor = Color.Transparent;
+			SeparatorVisibility = SeparatorVisibility.None;
 
 			var cell = new DataTemplate (typeof(ImageCell));
 			cell.SetBinding (TextCell.TextProperty, "Title");
 			cell.SetBinding (ImageCell.ImageSourceProperty, "IconSource");
-
+			
 			ItemTemplate = cell;
 		}
 	}

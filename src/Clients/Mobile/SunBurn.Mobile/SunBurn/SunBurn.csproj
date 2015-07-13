@@ -32,29 +32,14 @@
   <ItemGroup>
     <Compile Include="SunBurn.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Services\DataService.cs" />
-    <Compile Include="Interfaces\ILocationManager.cs" />
     <Compile Include="Pages\FrontPage.cs" />
     <Compile Include="Managers\FrontPageManager.cs" />
-    <Compile Include="Interfaces\IDataService.cs" />
     <Compile Include="Helpers\Settings.cs" />
     <Compile Include="Settings.cs" />
     <Compile Include="Pages\SetSkintypePage.cs" />
-    <Compile Include="Interfaces\IUvIndexService.cs" />
-    <Compile Include="Services\UvIndexService.cs" />
-    <Compile Include="Types\SkinType.cs" />
-    <Compile Include="Types\SpfTime.cs" />
-    <Compile Include="Calculators\ExposureCalculator.cs" />
-    <Compile Include="Interfaces\IExposureCalculator.cs" />
-    <Compile Include="Types\TimeToSunburnResult.cs" />
-    <Compile Include="Types\WeatherData.cs" />
-    <Compile Include="Types\WeatherResponse.cs" />
-    <Compile Include="Types\LocationResponse.cs" />
     <Compile Include="Pages\RootPage.cs" />
     <Compile Include="Pages\MenuPage.cs" />
     <Compile Include="Views\MenuListView.cs" />
-    <Compile Include="Types\MenuListData.cs" />
-    <Compile Include="Types\MenuItem.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <Import Project="..\packages\Xamarin.Forms.1.4.3.6374\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Xamarin.Forms.targets" Condition="Exists('..\packages\Xamarin.Forms.1.4.3.6374\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Xamarin.Forms.targets')" />
@@ -102,13 +87,16 @@
     <None Include="Content\normalize.css" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Services\" />
-    <Folder Include="Types\" />
     <Folder Include="Models\" />
-    <Folder Include="Interfaces\" />
     <Folder Include="Pages\" />
     <Folder Include="Managers\" />
-    <Folder Include="Calculators\" />
     <Folder Include="Views\" />
+    <Folder Include="Styles\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\SunBurn.BLL\SunBurn.BLL.csproj">
+      <Project>{94279D4E-A472-4360-A2BA-F838B0AE5CD2}</Project>
+      <Name>SunBurn.BLL</Name>
+    </ProjectReference>
   </ItemGroup>
 </Project>

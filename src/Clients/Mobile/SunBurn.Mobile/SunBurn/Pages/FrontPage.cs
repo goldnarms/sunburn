@@ -2,7 +2,10 @@
 using Xamarin.Forms;
 using SunBurn.Managers;
 using SunBurn.Calculators;
+using System.Collections;
+using System.Collections.Generic;
 using System.Threading.Tasks;
+using System.Threading;
 using System.Linq;
 
 namespace SunBurn
@@ -11,16 +14,39 @@ namespace SunBurn
 	{
 		private FrontPageManager _manager;
 		public FrontPage (){
+			IsBusy = true;
 			_manager = new FrontPageManager (DependencyService.Get<ILocationManager>(), new DataService(), new ExposureCalculator());
 			Init ();
+			IsBusy = false;
 		}
 
 		private async void Init(){
 			var location = _manager.GetCurrentLocation ();
-			var result = await _manager.GetResult (location);
-			foreach (var page in result.SunburnResults.Select (sr => BuildContent (result.Location, sr.Key, sr.Value))) {
-				Children.Add (page);
-			};
+			try {
+				var result = await _manager.GetResult (location);
+				
+				foreach (var page in result.SunburnResults.Select (sr => BuildContent (result.Location, sr.Key, sr.Value))) {
+					Children.Add (page);
+				};
+			} catch (Exception ex) {
+				Children.Clear ();
+				Children.Add(BuildContent ("Location", DateTime.Now.Date.ToString("M"), new SunburnResult {
+					Celcius = 0,
+					Fahrenheit = 0,
+					UvIndex = 0,
+					SpfTable = new List<SpfTime> () {
+						new SpfTime {
+							Spf = 0,
+							Time = TimeSpan.FromMinutes (30).ToString("c")
+						},
+						new SpfTime {
+							Spf = 15,
+							Time = TimeSpan.FromMinutes (60).ToString("c")
+						}
+					}
+				}));
+				await this.DisplayAlert ("Error", ex.Message, "Ok");
+			}
 		}
 
 		private ContentPage BuildContent(string locationName, string time, SunburnResult sunburnResult){
@@ -28,13 +54,14 @@ namespace SunBurn
 				Text = locationName,
 				VerticalOptions = LayoutOptions.Start,
 				HorizontalOptions = LayoutOptions.StartAndExpand,
-				FontSize = Device.GetNamedSize(NamedSize.Small, typeof(Label))
+				FontSize = Device.GetNamedSize(NamedSize.Micro, typeof(Label))
 			};
 
 			var dateLbl = new Label {
 				Text = time,
 				HorizontalOptions = LayoutOptions.CenterAndExpand,
 				FontSize = Device.GetNamedSize(NamedSize.Large, typeof(Label)),
+				FontAttributes = FontAttributes.Bold
 
 			};
 
@@ -42,37 +69,43 @@ namespace SunBurn
 				Children = {
 					new Label {
 						Text = "UV Index",
-						HorizontalOptions = LayoutOptions.CenterAndExpand
+						HorizontalOptions = LayoutOptions.EndAndExpand,
+						VerticalOptions = LayoutOptions.CenterAndExpand
 					},
 					new Label {
 						Text = sunburnResult.UvIndex.ToString(),
-						HorizontalOptions = LayoutOptions.CenterAndExpand,
-						FontSize = Device.GetNamedSize(NamedSize.Large, typeof(Label))
+						HorizontalOptions = LayoutOptions.StartAndExpand,
+						VerticalOptions = LayoutOptions.CenterAndExpand,
+						FontSize = 96
 					}
 				},
 				Orientation = StackOrientation.Horizontal,
-				VerticalOptions = LayoutOptions.CenterAndExpand
+				VerticalOptions = LayoutOptions.CenterAndExpand,
+				Padding = new Thickness(0, 20)
 			};
 
 			var sunBurnTable = new ListView {
 				ItemsSource = sunburnResult.SpfTable,
-
+				Header = "",
 				HeaderTemplate = new DataTemplate(() => {
 					Label spfHeaderLbl = new Label{
 						Text = "Spf",
 						FontAttributes = FontAttributes.Bold,
-						HorizontalOptions = LayoutOptions.CenterAndExpand
+						HorizontalOptions = LayoutOptions.CenterAndExpand,
+						FontSize = Device.GetNamedSize(NamedSize.Small, typeof(Label))
 					};
 
 					Label timeHeaderLbl = new Label{
 						Text = "Duration",
 						FontAttributes = FontAttributes.Bold,
-						HorizontalOptions = LayoutOptions.CenterAndExpand
+						HorizontalOptions = LayoutOptions.CenterAndExpand,
+						FontSize = Device.GetNamedSize(NamedSize.Small, typeof(Label))
 					};
 
 					return new StackLayout{
 						Orientation = StackOrientation.Horizontal,
-						Children = { spfHeaderLbl, timeHeaderLbl}
+						Children = { spfHeaderLbl, timeHeaderLbl},
+						BackgroundColor = Color.Gray
 					};
 				}),
 				ItemTemplate = new DataTemplate(() => {
@@ -87,19 +120,23 @@ namespace SunBurn
 					};
 					timeLbl.SetBinding(Label.TextProperty, "Time");
 
-					return new ViewCell{
+					return new ViewCell{						
 						View = new StackLayout{
 							Orientation = StackOrientation.Horizontal,
 							VerticalOptions = LayoutOptions.CenterAndExpand,
+							Spacing = 0,
+							Padding = new Thickness(0, 5),
 							Children = { spfLbl, timeLbl}
 						}
 					};
 				}),
-				VerticalOptions = LayoutOptions.End
+				VerticalOptions = LayoutOptions.End,
+				RowHeight = 40,
+
+				
 			};
 			var layout = new StackLayout {
-				Padding = new Thickness(20),
-				VerticalOptions = LayoutOptions.CenterAndExpand,
+				VerticalOptions = LayoutOptions.StartAndExpand,
 				Children = {
 					locationLbl, dateLbl, uvLayout, sunBurnTable
 				}

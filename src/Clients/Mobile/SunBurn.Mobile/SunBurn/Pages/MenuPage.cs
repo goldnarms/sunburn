@@ -11,7 +11,6 @@ namespace SunBurn
 		{
 			Icon = "settings.png";
 			Title = "menu";
-			BackgroundColor = Color.FromHex ("333333");
 
 			Menu = new MenuListView ();
 			var menuLabel = new ContentView {
