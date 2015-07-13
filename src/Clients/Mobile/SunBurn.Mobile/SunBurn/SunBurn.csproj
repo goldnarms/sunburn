@@ -33,13 +33,11 @@
     <Compile Include="SunBurn.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\DataService.cs" />
-    <Compile Include="Interfaces\ILocationManager.cs" />
     <Compile Include="Pages\FrontPage.cs" />
     <Compile Include="Managers\FrontPageManager.cs" />
     <Compile Include="Interfaces\IDataService.cs" />
     <Compile Include="Helpers\Settings.cs" />
     <Compile Include="Settings.cs" />
-    <Compile Include="Pages\SetSkintypePage.cs" />
     <Compile Include="Interfaces\IUvIndexService.cs" />
     <Compile Include="Services\UvIndexService.cs" />
     <Compile Include="Types\SkinType.cs" />
@@ -55,6 +53,13 @@
     <Compile Include="Views\MenuListView.cs" />
     <Compile Include="Types\MenuListData.cs" />
     <Compile Include="Types\MenuItem.cs" />
+    <Compile Include="Types\UserLocation.cs" />
+    <Compile Include="Types\Position.cs" />
+    <Compile Include="Interfaces\IPositionService.cs" />
+    <Compile Include="Services\LocationService.cs" />
+    <Compile Include="Interfaces\ILocationService.cs" />
+    <Compile Include="Types\PositionResponse.cs" />
+    <Compile Include="Pages\SettingsPage.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <Import Project="..\packages\Xamarin.Forms.1.4.3.6374\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Xamarin.Forms.targets" Condition="Exists('..\packages\Xamarin.Forms.1.4.3.6374\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Xamarin.Forms.targets')" />

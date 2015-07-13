@@ -10,13 +10,13 @@ namespace SunBurn
 	public class FrontPage : CarouselPage
 	{
 		private FrontPageManager _manager;
-		public FrontPage (){
-			_manager = new FrontPageManager (DependencyService.Get<ILocationManager>(), new DataService(), new ExposureCalculator());
+		public FrontPage (ILocationService locationService, IDataService dataService){
+			_manager = new FrontPageManager (locationService, dataService, new ExposureCalculator());
 			Init ();
 		}
 
 		private async void Init(){
-			var location = _manager.GetCurrentLocation ();
+			var location = _manager.GetCurrentLocation (); // Set later in the lifecyclee
 			var result = await _manager.GetResult (location);
 			foreach (var page in result.SunburnResults.Select (sr => BuildContent (result.Location, sr.Key, sr.Value))) {
 				Children.Add (page);

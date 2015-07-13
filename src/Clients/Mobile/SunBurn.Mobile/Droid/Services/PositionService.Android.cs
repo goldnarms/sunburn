@@ -3,15 +3,15 @@ using Android.Locations;
 using Android.Content;
 using Xamarin.Forms;
 
-[assembly:Dependency(typeof(SunBurn.Droid.Services.LocationMngr))]
+[assembly:Dependency(typeof(SunBurn.Droid.Services.PositionService))]
 namespace SunBurn.Droid.Services
 {
-	public class LocationMngr :ILocationManager
+	public class PositionService :IPositionService
 	{
 		const string Provider = LocationManager.GpsProvider;
 		private readonly LocationManager _locMgr;
 		private Android.Locations.Location _currentLocation;
-		public LocationMngr ()
+		public PositionService ()
 		{
 			_locMgr = Android.App.Application.Context.GetSystemService(Context.LocationService) as LocationManager;
 			if(_locMgr.IsProviderEnabled(Provider)){
@@ -28,7 +28,7 @@ namespace SunBurn.Droid.Services
 			_currentLocation = location;
 		}
 
-		public Tuple<double, double, double> GetLocation ()
+		public Tuple<double, double, double> GetCurrentPosition ()
 		{
 			if (_currentLocation == null)
 				return new Tuple<double, double, double> (0, 0, 0);

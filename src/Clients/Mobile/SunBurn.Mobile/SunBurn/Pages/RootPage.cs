@@ -14,12 +14,13 @@ namespace SunBurn
 			menuPage.Menu.ItemSelected += (object sender, SelectedItemChangedEventArgs e) => NavigateTo(e.SelectedItem as MenuItem);
 
 			Master = menuPage;
-
+			var locationService = DependencyService.Get<ILocationService> ();
+			var dataService = new DataService ();
 			// Check if user has set skin type
 			if(Settings.SkinTypeSetting == SkinType.NotSet)
-				Detail = new NavigationPage (new SetSkintypePage());
+				Detail = new NavigationPage (new SettingsPage(locationService, dataService));
 			else
-				Detail = new NavigationPage (new FrontPage());
+				Detail = new NavigationPage (new FrontPage(locationService, dataService));
 		}
 
 		private void NavigateTo(MenuItem menuItem){

@@ -4,13 +4,13 @@ using Xamarin.Forms;
 using UIKit;
 
 
-[assembly:Dependency(typeof(SunBurn.IOS.Services.LocationMngr))]
+[assembly:Dependency(typeof(SunBurn.IOS.Services.PositionService))]
 namespace SunBurn.IOS.Services
 {
-	public class LocationMngr :ILocationManager{
+	public class PositionService :IPositionService{
 		private CLLocationManager _iPhoneLocationManager = null;
 		private CLLocation _currentLocation = null;
-		public LocationMngr()
+		public PositionService()
 		{
 			_iPhoneLocationManager = new CLLocationManager ();
 			_iPhoneLocationManager.DesiredAccuracy = 1000;

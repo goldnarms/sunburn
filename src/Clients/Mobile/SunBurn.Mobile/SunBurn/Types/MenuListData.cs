@@ -11,7 +11,7 @@ namespace SunBurn
 			this.Add(new MenuItem{
 				Title = "Settings",
 				IconSource = "settings.png",
-				TargetType = typeof(SetSkintypePage)
+				TargetType = typeof(SettingsPage)
 			});
 
 			this.Add (new MenuItem {
