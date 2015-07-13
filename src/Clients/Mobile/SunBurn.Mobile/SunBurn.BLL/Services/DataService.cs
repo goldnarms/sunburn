@@ -37,5 +37,13 @@ namespace SunBurn
 
 			return JsonConvert.DeserializeObject<LocationResponse>(result);
 		}
+
+		public async Task<PositionResponse> GetPositionForLocation(string location){
+			var client = GetClient ();
+			var result = await client.GetStringAsync (string.Format(GeoCodingUrl, location, GeoCodingKey));
+
+			return JsonConvert.DeserializeObject<PositionResponse>(result);
+
+		}
 	}
 }

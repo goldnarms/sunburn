@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using Xamarin.Forms;
 using SunBurn.Managers;
 using SunBurn.Calculators;
@@ -13,9 +13,8 @@ namespace SunBurn
 	public class FrontPage : CarouselPage
 	{
 		private FrontPageManager _manager;
-		public FrontPage (){
-			IsBusy = true;
-			_manager = new FrontPageManager (DependencyService.Get<ILocationManager>(), new DataService(), new ExposureCalculator());
+		public FrontPage (ILocationService locationService, IDataService dataService){
+			_manager = new FrontPageManager (locationService, dataService, new ExposureCalculator());
 			Init ();
 			IsBusy = false;
 		}
