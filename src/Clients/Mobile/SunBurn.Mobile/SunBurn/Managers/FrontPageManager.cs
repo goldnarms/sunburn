@@ -19,32 +19,26 @@ namespace SunBurn.Managers
 			_exposureCalculator = exposureCalculator;
 		}
 
-		public UserLocation GetCurrentLocation(){
-			return new UserLocation {
+		public BLL.UserLocation GetCurrentLocation(){
+			return new BLL.UserLocation {
 				Position = Settings.Position,
 				Name = Settings.LocationName
 			};
 		}
 
-		public async Task<TimeToSunburnResult> GetResult(UserLocation userLocation){
+		public async Task<TimeToSunburnResult> GetResult(BLL.UserLocation userLocation){
 			var result = new TimeToSunburnResult {
 				SunburnResults = new Dictionary<string, SunburnResult>()
 			};
-			var locationData = await _dataService.GetLocationName (new Tuple<double, double> (userLocation.Position.Latitude, userLocation.Position.Longitude));
-			var weatherData = await _dataService.GetWeatherData(new Tuple<double, double>(userLocation.Position.Latitude, userLocation.Position.Longitude));
-			result.Location = locationData.results.Count() > 0 ? locationData.results.First ().address_components.Where (a => a.types.Contains ("administrative_area_level_2") || a.types.Contains ("administrative_area_level_1")).First ().long_name : "";
-			foreach (var weatherResult in weatherData.data.weather) {
-				var hourIndex = DateTime.UtcNow.Hour -1 > weatherResult.hourly.Count() -1 ? weatherResult.hourly.Count() - 1 : DateTime.UtcNow.Hour -1;
-				var sunburnResult = new SunburnResult();
 			try {
-				var locationData = await _dataService.GetLocationName (new Tuple<double, double> (position.Item1, position.Item2));
+				var locationData = await _dataService.GetLocationName (new Tuple<double, double> (userLocation.Position.Latitude, userLocation.Position.Longitude));
 				result.Location = locationData.results.Count() > 0 ? locationData.results.First ().address_components.Where (a => a.types.Contains ("administrative_area_level_2") || a.types.Contains ("administrative_area_level_1")).First ().long_name : "";
 				
 			} catch (Exception ex) {
 				throw ex;
 			}
 			try {
-				var weatherData = await _dataService.GetWeatherData(new Tuple<double, double>(position.Item1, position.Item2));
+				var weatherData = await _dataService.GetWeatherData(new Tuple<double, double>(userLocation.Position.Latitude, userLocation.Position.Longitude));
 				
 				foreach (var weatherResult in weatherData.data.weather) {
 					var hourIndex = DateTime.UtcNow.Hour -1 > weatherResult.hourly.Count() -1 ? weatherResult.hourly.Count() - 1 : DateTime.UtcNow.Hour -1;
@@ -57,12 +51,16 @@ namespace SunBurn.Managers
 				foreach (var spf in _sunProtectionFactors) {
 					var timeToSunburnResult = _exposureCalculator.CalculateTimeToSunburn (Settings.SkinTypeSetting, weatherResult.uvIndex, spf, userLocation.Position.Altitude, false);
 					sunburnResult.SpfTable.Add(new SpfTime{Spf = spf, Time = timeToSunburnResult.ToString("c")});
+					}
 				}
 			} catch (Exception ex) {
 				throw ex;			
 			}
 			return result; 
-		}
+		
 	}
+		}
+
 }
+
 

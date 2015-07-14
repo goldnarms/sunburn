@@ -5,7 +5,7 @@ namespace SunBurn
 {
 	public interface ILocationService
 	{
-		Task<UserLocation> GetUserLocation();
+		Task<BLL.UserLocation> GetUserLocation();
 	}
 }
 

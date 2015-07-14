@@ -87,6 +87,10 @@
       <Project>{2C7F2ECD-D5A2-4109-AF31-B13F63CE7E81}</Project>
       <Name>SunBurn</Name>
     </ProjectReference>
+    <ProjectReference Include="..\SunBurn.BLL\SunBurn.BLL.csproj">
+      <Project>{94279D4E-A472-4360-A2BA-F838B0AE5CD2}</Project>
+      <Name>SunBurn.BLL</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="MainActivity.cs" />

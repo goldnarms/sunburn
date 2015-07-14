@@ -44,7 +44,7 @@ namespace SunBurn
 						}
 					}
 				}));
-				await this.DisplayAlert ("Error", ex.Message, "Ok");
+				this.DisplayAlert ("Error", ex.Message, "Ok");
 			}
 		}
 

@@ -7,7 +7,7 @@ namespace SunBurn
 	{
 		Task<WeatherResponse> GetWeatherData (Tuple<double, double> position);
 		Task<LocationResponse> GetLocationName (Tuple<double, double> position);
-		Task<PositionResponse> GetPositionForLocation(string location);
+		Task<LocationResponse> GetPositionForLocation(string location);
 	}
 }
 

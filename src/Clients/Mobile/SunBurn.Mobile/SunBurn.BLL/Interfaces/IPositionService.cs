@@ -7,4 +7,3 @@ namespace SunBurn
 		Tuple<double, double, double> GetCurrentPosition();
 	}
 }
-

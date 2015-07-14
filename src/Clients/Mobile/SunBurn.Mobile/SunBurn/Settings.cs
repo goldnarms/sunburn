@@ -28,12 +28,12 @@ namespace SunBurn
 			}
 		}
 
-		public static Position Position {
+		public static BLL.Position Position {
 			get {
 				var lat = AppSettings.GetValueOrDefault ("lat", (double)0);
 				var lng = AppSettings.GetValueOrDefault ("lng", (double)0);
 				var alt = AppSettings.GetValueOrDefault ("alt", (double)0);
-				return new Position {
+				return new BLL.Position {
 					Latitude = lat,
 					Longitude = lng,
 					Altitude = alt

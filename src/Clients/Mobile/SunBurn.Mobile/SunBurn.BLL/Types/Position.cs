@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace SunBurn
+namespace SunBurn.BLL
 {
 	public class Position
 	{
@@ -18,7 +18,5 @@ namespace SunBurn
 			get;
 			set;
 		}
-
 	}
 }
-

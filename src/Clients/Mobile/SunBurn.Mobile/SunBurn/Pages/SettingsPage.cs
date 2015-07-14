@@ -17,7 +17,7 @@ namespace SunBurn
 		private Dictionary<string, SkinType> _skinTypes;
 		private IDataService _dataService;
 		private Entry _locationEntry;
-		private UserLocation _currentLocation;
+		private BLL.UserLocation _currentLocation;
 		public SettingsPage(ILocationService locationService, IDataService dataService)
 		{
 			Content = BuildContent ();
@@ -98,7 +98,7 @@ namespace SunBurn
 		}
 
 		void OnItemSelected(object sender, SelectedItemChangedEventArgs e){
-			var seleced = e.SelectedItem as KeyValuePair<string, Tuple<double, double>>;
+			var seleced = (KeyValuePair<string, Tuple<double, double>>)e.SelectedItem;
 			_locationEntry.Text = seleced.Key;
 		}
 
@@ -107,13 +107,13 @@ namespace SunBurn
 				// search using entered location
 				var result = _dataService.GetPositionForLocation(_locationEntry.Text).Result;
 				var locations = new Dictionary<string, Tuple<double, double>> ();
-				locations.Add (_currentLocation);
-//				foreach (var position in result) {
-//					if (!locations.ContainsKey (position.Name)) {
+				locations.Add (_currentLocation.Name, new Tuple<double, double>(_currentLocation.Position.Latitude, _currentLocation.Position.Longitude));
+				foreach (var position in result.results) {
+//					if (!locations.ContainsKey (position.)) {
 //						locations.Add (position.Name, new Tuple<double, double> (position.Latitude, position.Longitude));
 //					}
-//				}
-				_locationResultList.items
+				}
+				_locationResultList.ItemsSource = locations;
 				// foreach result add to list
 			}
 		}
@@ -121,14 +121,14 @@ namespace SunBurn
 		void OnButtonClicked(object sender, EventArgs e)
 		{
 			Settings.SkinTypeSetting = _skinTypes [_picker.Items [_picker.SelectedIndex]];
-			var selectedLocation = _locationResultList.SelectedItem as KeyValuePair<string, Tuple<double, double>>;
+			var selectedLocation = (KeyValuePair<string, Tuple<double, double>>)_locationResultList.SelectedItem;
 			Settings.LocationName = selectedLocation.Key;
-			Settings.Position = new Position () {
+			Settings.Position = new BLL.Position () {
 				Altitude = 0,
 				Latitude = _locationResults [selectedLocation.Key].Item1,
 				Longitude = _locationResults [selectedLocation.Key].Item2
 			};
-			Navigation.PushAsync (new FrontPage (_locationService, _dataServdice));
+			Navigation.PushAsync (new FrontPage (_locationService, _dataService));
 		}	
 
 		void OnIndexChanged(object sender, EventArgs e){

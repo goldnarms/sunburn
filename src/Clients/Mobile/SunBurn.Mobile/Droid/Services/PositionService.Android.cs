@@ -2,6 +2,7 @@
 using Android.Locations;
 using Android.Content;
 using Xamarin.Forms;
+using SunBurn;
 
 [assembly:Dependency(typeof(SunBurn.Droid.Services.PositionService))]
 namespace SunBurn.Droid.Services

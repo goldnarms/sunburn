@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace SunBurn
+namespace SunBurn.BLL
 {
 	public class UserLocation
 	{
@@ -15,4 +15,3 @@ namespace SunBurn
 		}
 	}
 }
-
