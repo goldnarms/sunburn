@@ -11,7 +11,7 @@ using Android.Widget;
 
 namespace SunBurn.Wear
 {
-	[Activity (Label = "SunBurn.Wear", MainLauncher = true, Icon = "@drawable/icon")]
+	[Activity (Label = "SunBurn", MainLauncher = true, Icon = "@drawable/icon")]
 	public class MainActivity : Activity
 	{
 		int count = 1;
@@ -28,9 +28,9 @@ namespace SunBurn.Wear
 
 				// Get our button from the layout resource,
 				// and attach an event to it
-				Button button = FindViewById<Button> (Resource.Id.myButton);
+				Button btnStartTimer = FindViewById<Button> (Resource.Id.myButton);
 				
-				button.Click += delegate {
+				btnStartTimer.Click += delegate {
 					var notification = new NotificationCompat.Builder (this)
 						.SetContentTitle ("Button tapped")
 						.SetContentText ("Button tapped " + count++ + " times!")

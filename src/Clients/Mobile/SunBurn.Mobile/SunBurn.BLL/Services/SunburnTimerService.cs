@@ -16,10 +16,13 @@ namespace SunBurn.BLL
 		{
 			_timeToSunBurn = time;
 			var tick = TimeSpan.FromSeconds (1);
-			Device.StartTimer (tick, (_timerRunning) => {
-				if(_timeToSunBurn.Seconds > 1){
+			Device.StartTimer (tick, () => {
+
+				if(_timerRunning && _timeToSunBurn.Seconds > 1){
 					_timeToSunBurn = _timeToSunBurn.Subtract(tick);
+					return true;
 				}
+				return false;
 			});
 		}
 
