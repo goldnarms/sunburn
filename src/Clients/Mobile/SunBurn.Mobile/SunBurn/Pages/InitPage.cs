@@ -1,14 +1,9 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using Xamarin.Forms;
 
 namespace SunBurn
 {
-	public class SettingsPage: ContentPage
+	public class InitPage : ContentPage
 	{
-
 		private ILocationService _locationService;
 		private Picker _picker;
 		private Button _btnOk;
@@ -18,7 +13,7 @@ namespace SunBurn
 		private IDataService _dataService;
 		private Entry _locationEntry;
 		private BLL.UserLocation _currentLocation;
-		public SettingsPage(ILocationService locationService, IDataService dataService)
+		public InitPage(ILocationService locationService, IDataService dataService)
 		{
 			Content = BuildContent ();
 			Padding = new Thickness(10, Device.OnPlatform(20, 0, 0), 10, 5);
@@ -35,6 +30,13 @@ namespace SunBurn
 		}
 
 		private View BuildContent(){
+			var welcomeLbl = new Label {
+				Text = "Please fill in information",
+				HorizontalOptions = LayoutOptions.Center,
+				VerticalOptions = LayoutOptions.CenterAndExpand,
+				FontSize = Device.GetNamedSize(NamedSize.Large, typeof(Label))
+			};
+
 			_skinTypes = new Dictionary<string, SkinType> {
 				{ "Very light", SkinType.VeryLight },
 				{ "Light", SkinType.Light},
@@ -44,7 +46,7 @@ namespace SunBurn
 				{"Very dark", SkinType.Black}
 			};
 
-			var label = new Label {
+			var skinTypeLbl = new Label {
 				Text = "Select your skintype",
 				HorizontalOptions = LayoutOptions.Center,
 				VerticalOptions = LayoutOptions.CenterAndExpand
@@ -91,7 +93,7 @@ namespace SunBurn
 
 			_locationResultList.ItemSelected += OnItemSelected;
 			return new StackLayout{
-				Children = {label, _picker, locationLbl, _locationEntry, _locationResultList, _btnOk},
+				Children = {skinTypeLbl, _picker, locationLbl, _locationEntry, _locationResultList, _btnOk},
 				VerticalOptions = LayoutOptions.CenterAndExpand,
 				HorizontalOptions = LayoutOptions.StartAndExpand
 			};
@@ -139,3 +141,4 @@ namespace SunBurn
 		}
 	}
 }
+
