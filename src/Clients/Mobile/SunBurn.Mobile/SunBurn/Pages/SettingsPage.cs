@@ -110,11 +110,11 @@ namespace SunBurn
 				var locations = new Dictionary<string, Tuple<double, double>> ();
 				locations.Add (_currentLocation.Name, new Tuple<double, double>(_currentLocation.Position.Latitude, _currentLocation.Position.Longitude));
 				foreach (var position in result.results) {
-					var name = position.address_components.First (a => a.types.Contains ("administrative_area_level_2") || a.types.Contains ("administrative_area_level_1"));
-					if (!locations.ContainsKey (name))
+					var name = position.address_components.First (a => a.types.Contains ("administrative_area_level_2") || a.types.Contains ("administrative_area_level_1")).long_name;
+					if (!locations.ContainsKey(name))
 						locations.Add (name, new Tuple<double, double> ((double)position.geometry.location.lat, (double)position.geometry.location.lng));
 				}
-				_locationResultList.ItemSource = locations;
+				_locationResultList.ItemsSource = locations;
 			}
 		}
 

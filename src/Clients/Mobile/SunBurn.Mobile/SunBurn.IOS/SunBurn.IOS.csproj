@@ -114,6 +114,8 @@
     <None Include="packages.config" />
     <None Include="PluginsHelp\ConnectivityReadme.txt" />
     <None Include="Properties\_SettingsStarted.txt" />
+    <None Include="Services\NotifyService.IOS.cs" />
+    <None Include="Services\DeviceService.IOS.cs" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Main.cs" />
