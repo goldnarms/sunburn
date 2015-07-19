@@ -200,6 +200,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\SunBurn.BLL\SunBurn.BLL.csproj">
+      <Project>{94279d4e-a472-4360-a2ba-f838b0ae5cd2}</Project>
+      <Name>SunBurn.BLL</Name>
+    </ProjectReference>
     <ProjectReference Include="..\SunBurn\SunBurn.csproj">
       <Project>{2c7f2ecd-d5a2-4109-af31-b13f63ce7e81}</Project>
       <Name>SunBurn</Name>
