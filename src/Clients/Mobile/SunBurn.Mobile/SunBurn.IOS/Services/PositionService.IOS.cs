@@ -2,6 +2,7 @@
 using CoreLocation;
 using Xamarin.Forms;
 using UIKit;
+using SunBurn.BLL;
 
 
 [assembly:Dependency(typeof(SunBurn.IOS.Services.PositionService))]
