@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<string name="hello_rect">I\'m Rect. Tap Me!</string>
+	<string name="hello_round">I\'m Round. Tap Me!</string>
+	<string name="app_name">SunBurn</string>
+	<string name="txt_uv_index">UV Index: </string>
+	<string name="txt_applied_spf">Applied SPF: </string>
+	<string name="txt_time_to_burn"></string>
+	<string name="txt_start_timer">Start timer</string>
+</resources>

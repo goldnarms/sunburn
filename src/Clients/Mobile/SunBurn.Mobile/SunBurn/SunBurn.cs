@@ -1,6 +1,7 @@
 ﻿using System;
 using Xamarin.Forms;
 using Connectivity.Plugin;
+using SunBurn.BLL;
 
 namespace SunBurn
 {
@@ -16,8 +17,11 @@ namespace SunBurn
 
 		protected override void OnStart ()
 		{
+			var deviceService = DependencyService.Get<IDeviceService> ();
+			deviceService.SetupSettings ();
 			//var locationManager = S
 			// Handle when your app starts
+
 		}
 
 		protected override void OnSleep ()
