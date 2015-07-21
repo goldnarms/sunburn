@@ -2,39 +2,15 @@
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
   <MonoDevelop.Ide.Workbench ActiveDocument="SunBurn/Pages/InitPage.cs">
     <Files>
-      <File FileName="SunBurn/SunBurn.cs" Line="2" Column="7" />
-      <File FileName="SunBurn.BLL/Calculators/ExposureCalculator.cs" Line="29" Column="82" />
+      <File FileName="SunBurn/SunBurn.cs" Line="1" Column="1" />
+      <File FileName="SunBurn.BLL/Calculators/ExposureCalculator.cs" Line="1" Column="1" />
       <File FileName="SunBurn.NotificationsService/MyClass.cs" Line="1" Column="1" />
-      <File FileName="SunBurn/Pages/SettingsPage.cs" Line="140" Column="3" />
-      <File FileName="SunBurn.BLL/Services/LocationService.cs" Line="22" Column="219" />
+      <File FileName="SunBurn/Pages/SettingsPage.cs" Line="1" Column="1" />
+      <File FileName="SunBurn.BLL/Services/LocationService.cs" Line="1" Column="1" />
       <File FileName="SunBurn/Pages/InitPage.cs" Line="36" Column="53" />
-      <File FileName="SunBurn/Pages/RootPage.cs" Line="21" Column="46" />
-      <File FileName="SunBurn/Pages/FrontPage.cs" Line="56" Column="5" />
+      <File FileName="SunBurn/Pages/RootPage.cs" Line="1" Column="1" />
+      <File FileName="SunBurn/Pages/FrontPage.cs" Line="1" Column="1" />
     </Files>
-    <Pads>
-      <Pad Id="ProjectPad">
-        <State name="__root__">
-          <Node name="SunBurn.Mobile" expanded="True">
-            <Node name="SunBurn" expanded="True">
-              <Node name="Managers" expanded="True" />
-              <Node name="Pages" expanded="True">
-                <Node name="InitPage.cs" selected="True" />
-              </Node>
-            </Node>
-            <Node name="SunBurn.BLL" expanded="True">
-              <Node name="Calculators" expanded="True" />
-              <Node name="Services" expanded="True" />
-            </Node>
-            <Node name="SunBurn.NotificationsService" expanded="True" />
-          </Node>
-        </State>
-      </Pad>
-      <Pad Id="MonoDevelop.NUnit.TestPad">
-        <State name="__root__">
-          <Node name="SunBurn.Mobile" expanded="True" selected="True" />
-        </State>
-      </Pad>
-    </Pads>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore>
