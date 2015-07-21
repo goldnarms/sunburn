@@ -8,14 +8,13 @@ using Android.Support.V4.App;
 using Android.Support.Wearable.Views;
 using Android.Views;
 using Android.Widget;
+using SunBurn.BLL;
 
 namespace SunBurn.Wear
 {
 	[Activity (Label = "SunBurn", MainLauncher = true, Icon = "@drawable/icon")]
 	public class MainActivity : Activity
 	{
-		int count = 1;
-
 		protected override void OnCreate (Bundle bundle)
 		{
 			base.OnCreate (bundle);
@@ -28,9 +27,11 @@ namespace SunBurn.Wear
 
 				// Get our button from the layout resource,
 				// and attach an event to it
-				Button btnStartTimer = FindViewById<Button> (Resource.Id.myButton);
+				Button btnStartTimer = FindViewById<Button> (Resource.Id.btnStartTime);
 				
+				var timer = new BLL.SunburnTimerService();
 				btnStartTimer.Click += delegate {
+					timer.StartTimer();
 					var notification = new NotificationCompat.Builder (this)
 						.SetContentTitle ("Button tapped")
 						.SetContentText ("Button tapped " + count++ + " times!")
@@ -39,7 +40,7 @@ namespace SunBurn.Wear
 
 					var manager = NotificationManagerCompat.From (this);
 					manager.Notify (1, notification);
-					button.Text = "Check Notification!";
+					btnStartTimer.Text = "Check Notification!";
 				};
 			};
 		}

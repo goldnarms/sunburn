@@ -20,6 +20,7 @@ namespace SunBurn.BLL
 
 				if(_timerRunning && _timeToSunBurn.Seconds > 1){
 					_timeToSunBurn = _timeToSunBurn.Subtract(tick);
+					TimerTickEventHandler;
 					return true;
 				}
 				return false;
@@ -36,6 +37,8 @@ namespace SunBurn.BLL
 			_timerRunning = false;
 			_timeToSunBurn = TimeSpan.Zero;
 		}
+
+		public delegate void TimerTickEventHandler();
 	}
 }
 

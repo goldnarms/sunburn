@@ -7,7 +7,7 @@
     tools:context=".MainActivity"
     tools:deviceIds="wear_round">
     <TextView
-        android:id="@android:id/lblLocation"
+        android:id="@+id/lblLocation"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="28sp"
@@ -25,7 +25,7 @@
             android:textColor="#000000"
             android:text="@string/txt_uv_index" />
         <TextView
-            android:id="@android:id/lblUvIndex"
+            android:id="@+id/lblUvIndex"
             android:textSize="36sp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -42,7 +42,7 @@
             android:textColor="#000000"
             android:text="@string/txt_applied_spf" />
         <TextView
-            android:id="@android:id/lblAppliedSpf"
+            android:id="@+id/lblAppliedSpf"
             android:textSize="36sp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -59,7 +59,7 @@
             android:textColor="#000000"
             android:text="@string/txt_time_to_burn" />
         <TextView
-            android:id="@android:id/lblTimeToSunburn"
+            android:id="@+id/lblTimeToSunburn"
             android:textSize="36sp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -71,5 +71,5 @@
         android:id="@+id/btnStartTime"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/@string/txt_start_timer" />
+        android:text="@string/txt_start_timer" />
 </LinearLayout>
