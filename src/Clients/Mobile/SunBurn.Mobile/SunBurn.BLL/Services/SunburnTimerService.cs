@@ -41,10 +41,6 @@ namespace SunBurn
 			_timerRunning = false;
 			_timeToSunBurn = TimeSpan.Zero;
 		}
-
-		//public event TimerTickEventHandler TimerTick;
-
-
 	}
 }
 

@@ -184,7 +184,4 @@
   <Target Name="AfterBuild">
   </Target>
   -->
-  <ItemGroup>
-    <Folder Include="Services\" />
-  </ItemGroup>
 </Project>
