@@ -1,7 +1,7 @@
 ﻿using System;
 using Xamarin.Forms;
 
-namespace SunBurn.BLL
+namespace SunBurn
 {
 	public class SunburnTimerService : ISunburnTimerService
 	{
@@ -20,7 +20,7 @@ namespace SunBurn.BLL
 
 				if(_timerRunning && _timeToSunBurn.Seconds > 1){
 					_timeToSunBurn = _timeToSunBurn.Subtract(tick);
-					TimerTickEventHandler;
+
 					return true;
 				}
 				return false;
@@ -37,6 +37,8 @@ namespace SunBurn.BLL
 			_timerRunning = false;
 			_timeToSunBurn = TimeSpan.Zero;
 		}
+
+		public event TimerTickEventHandler TimerTick;
 
 		public delegate void TimerTickEventHandler();
 	}

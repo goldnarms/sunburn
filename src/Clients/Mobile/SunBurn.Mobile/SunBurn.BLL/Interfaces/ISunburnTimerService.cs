@@ -1,14 +1,14 @@
 ﻿using System;
 using SunBurn.BLL;
 
-namespace SunBurn.BLL
+namespace SunBurn
 {
 	public interface ISunburnTimerService
 	{
 		void StartTimer(TimeSpan time);
 		void PauseTimer();
 		void StopTimer();
-		event SunBurn.BLL.SunburnTimerService.TimerTickEventHandler TimerTick;
+		event SunBurn.SunburnTimerService.TimerTickEventHandler TimerTick;
 	}
 }
 

@@ -40,11 +40,12 @@ namespace SunBurn.IOS.Services
 				_iPhoneLocationManager.StartUpdatingLocation ();
  		}
 
-		public Tuple<double, double, double> GetLocation ()
+		public Tuple<double, double, double> GetCurrentPosition ()
 		{
 			if (_currentLocation == null)
 				return new Tuple<double, double, double> (48.834, 2.394, 0);
 			return new Tuple<double, double, double>(_currentLocation.Coordinate.Latitude, _currentLocation.Coordinate.Longitude, _currentLocation.Altitude);
+
 		}
 	}
 }
