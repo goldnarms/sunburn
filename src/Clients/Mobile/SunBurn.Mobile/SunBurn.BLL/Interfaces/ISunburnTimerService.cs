@@ -8,7 +8,6 @@ namespace SunBurn
 		void StartTimer(TimeSpan time);
 		void PauseTimer();
 		void StopTimer();
-		event SunBurn.SunburnTimerService.TimerTickEventHandler TimerTick;
 	}
 }
 

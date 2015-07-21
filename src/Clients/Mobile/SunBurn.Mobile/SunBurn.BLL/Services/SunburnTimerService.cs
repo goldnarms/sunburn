@@ -1,5 +1,6 @@
 ﻿using System;
 using Xamarin.Forms;
+using SunBurn.BLL;
 
 namespace SunBurn
 {
@@ -7,6 +8,8 @@ namespace SunBurn
 	{
 		private TimeSpan _timeToSunBurn;
 		private bool _timerRunning = false;
+		public delegate void TimerTickHandler(object timer, SunburnTimerInfoArgs timerInfo);
+		public TimerTickHandler TimerTick;
 		public SunburnTimerService ()
 		{
 			
@@ -20,7 +23,8 @@ namespace SunBurn
 
 				if(_timerRunning && _timeToSunBurn.Seconds > 1){
 					_timeToSunBurn = _timeToSunBurn.Subtract(tick);
-
+					SunburnTimerInfoArgs sunburnTimerInfo = new SunburnTimerInfoArgs(_timeToSunBurn, _timerRunning);
+					TimerTick(this, sunburnTimerInfo);
 					return true;
 				}
 				return false;
@@ -38,9 +42,9 @@ namespace SunBurn
 			_timeToSunBurn = TimeSpan.Zero;
 		}
 
-		public event TimerTickEventHandler TimerTick;
+		//public event TimerTickEventHandler TimerTick;
 
-		public delegate void TimerTickEventHandler();
+
 	}
 }
 

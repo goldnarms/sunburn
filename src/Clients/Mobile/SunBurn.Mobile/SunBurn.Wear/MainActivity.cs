@@ -107,6 +107,12 @@ namespace SunBurn.Wear
 			_timeToSunburnLbl.Text = _timeToSunburn.ToString ();
 
 			_timerService = new SunburnTimerService();
+			_timerService.TimerTick += new SunburnTimerService.TimerTickHandler (TimerTick);
+		}
+
+		public void TimerTick(object timer, SunburnTimerInfoArgs infoArgs)
+		{
+			_timeToSunburnLbl.Text = infoArgs.remainingTime.ToString ("c");
 		}
 	}
 }
