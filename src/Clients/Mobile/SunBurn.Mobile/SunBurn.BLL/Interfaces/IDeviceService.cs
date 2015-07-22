@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace SunBurn.BLL
+namespace SunBurn
 {
 	public interface IDeviceService
 	{

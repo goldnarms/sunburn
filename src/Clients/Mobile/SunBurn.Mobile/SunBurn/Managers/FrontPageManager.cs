@@ -32,7 +32,7 @@ namespace SunBurn.Managers
 			};
 			try {
 				var locationData = await _dataService.GetLocationName (new Tuple<double, double> (userLocation.Position.Latitude, userLocation.Position.Longitude));
-				result.Location = locationData.results.Count() > 0 ? locationData.results.First ().address_components.Where (a => a.types.Contains ("administrative_area_level_2") || a.types.Contains ("administrative_area_level_1")).First ().long_name : "";
+				result.Location = locationData.results.Count() > 0 ? FormatterHelper.FormatAddress(locationData.results.First ()) : "";
 				
 			} catch (Exception ex) {
 				throw ex;

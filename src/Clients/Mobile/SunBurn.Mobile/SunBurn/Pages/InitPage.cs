@@ -21,6 +21,7 @@ namespace SunBurn
 		{
 			Content = BuildContent ();
 			Padding = new Thickness(10, Device.OnPlatform(20, 0, 0), 10, 5);
+			Style = Styles.backgroundLayoutStyle;
 			_locationService = locationService;
 			_dataService = dataService;
 			Init ();
@@ -38,7 +39,7 @@ namespace SunBurn
 				Text = "Please fill in information",
 				HorizontalOptions = LayoutOptions.Center,
 				VerticalOptions = LayoutOptions.CenterAndExpand,
-				FontSize = Device.GetNamedSize(NamedSize.Large, typeof(Label))
+				Style = Styles.headerLabelStyle
 			};
 
 			_skinTypes = new Dictionary<string, SkinType> {
@@ -53,7 +54,8 @@ namespace SunBurn
 			var skinTypeLbl = new Label {
 				Text = "Select your skintype",
 				HorizontalOptions = LayoutOptions.Center,
-				VerticalOptions = LayoutOptions.CenterAndExpand
+				VerticalOptions = LayoutOptions.CenterAndExpand,
+				Style = Styles.infoLabelStyle
 			};
 
 			_picker = new Picker {
@@ -70,8 +72,7 @@ namespace SunBurn
 
 			_btnOk = new Button {
 				Text = "OK",
-				Font = Font.SystemFontOfSize (NamedSize.Large),
-				BorderWidth = 1,
+				Style = Styles.buttonStyle,
 				HorizontalOptions = LayoutOptions.Center,
 				VerticalOptions = LayoutOptions.CenterAndExpand,
 				IsEnabled = false
@@ -81,7 +82,8 @@ namespace SunBurn
 
 			var locationLbl = new Label {
 				Text = "Set your location",
-				HorizontalOptions = LayoutOptions.StartAndExpand
+				HorizontalOptions = LayoutOptions.StartAndExpand,
+				Style = Styles.infoLabelStyle
 			};
 
 			_locationEntry = new Entry {
@@ -97,7 +99,7 @@ namespace SunBurn
 
 			_locationResultList.ItemSelected += OnItemSelected;
 			return new StackLayout{
-				Children = {skinTypeLbl, _picker, locationLbl, _locationEntry, _locationResultList, _btnOk},
+				Children = { welcomeLbl, skinTypeLbl, _picker, locationLbl, _locationEntry, _locationResultList, _btnOk},
 				VerticalOptions = LayoutOptions.CenterAndExpand,
 				HorizontalOptions = LayoutOptions.StartAndExpand
 			};

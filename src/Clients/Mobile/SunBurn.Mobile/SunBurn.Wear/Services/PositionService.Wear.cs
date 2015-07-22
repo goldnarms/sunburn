@@ -2,6 +2,7 @@
 using Android.Locations;
 using Android.Content;
 using SunBurn;
+
 namespace SunBurn.Wear
 {
 	public class PositionService:IPositionService

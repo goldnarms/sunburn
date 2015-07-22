@@ -13,25 +13,36 @@ namespace SunBurn
 		private Picker _picker;
 		private Button _btnOk;
 		private ListView _locationResultList;
-		private Dictionary<string, Tuple<double, double>> _locationResults;
+		private List<LocationListItem> _locationResults;
 		private Dictionary<string, SkinType> _skinTypes;
 		private IDataService _dataService;
 		private Entry _locationEntry;
 		private BLL.UserLocation _currentLocation;
+
+		public SettingsPage ()
+		{
+			var positionService = DependencyService.Get<IPositionService> ();
+			_dataService = new DataService ();
+			_locationService = new LocationService (positionService, _dataService);
+			Init ();
+		}
+
 		public SettingsPage(ILocationService locationService, IDataService dataService)
 		{
-			Content = BuildContent ();
-			Padding = new Thickness(10, Device.OnPlatform(20, 0, 0), 10, 5);
-			_locationService = locationService;
 			_dataService = dataService;
+			_locationService = locationService;
 			Init ();
 		}
 
 		private async void Init(){
-			_locationResults = new Dictionary<string, Tuple<double, double>> ();
+			Content = BuildContent ();
+			Padding = new Thickness(10, Device.OnPlatform(20, 0, 0), 10, 5);
+			Style = Styles.backgroundLayoutStyle;
+			_locationResults = new List<LocationListItem> ();
 			_currentLocation = await _locationService.GetUserLocation();
-			_locationResults.Add ("Current location: " + _currentLocation.Name, new Tuple<double, double>(_currentLocation.Position.Latitude, _currentLocation.Position.Longitude));
+			_locationResults.Add (new LocationListItem { Name = "Current location: " + _currentLocation.Name, Position = new Tuple<double, double>(_currentLocation.Position.Latitude, _currentLocation.Position.Longitude)});
 			_locationResultList.ItemsSource = _locationResults;
+			_picker.SelectedIndex = _picker.Items.IndexOf (Enum.GetName(typeof(SkinType), Settings.SkinTypeSetting));
 		}
 
 		private View BuildContent(){
@@ -39,13 +50,13 @@ namespace SunBurn
 				{ "Very light", SkinType.VeryLight },
 				{ "Light", SkinType.Light},
 				{ "Medium", SkinType.Medium},
-				{"Tan", SkinType.Tan},
-				{"Dark", SkinType.Dark},
-				{"Very dark", SkinType.Black}
+				{ "Tan", SkinType.Tan},
+				{ "Dark", SkinType.Dark},
+				{ "Very dark", SkinType.Black}
 			};
 
 			var label = new Label {
-				Text = "Select your skintype",
+				Text = "Your skintype",
 				HorizontalOptions = LayoutOptions.Center,
 				VerticalOptions = LayoutOptions.CenterAndExpand
 			};
@@ -64,29 +75,37 @@ namespace SunBurn
 
 			_btnOk = new Button {
 				Text = "OK",
-				Font = Font.SystemFontOfSize (NamedSize.Large),
-				BorderWidth = 1,
 				HorizontalOptions = LayoutOptions.Center,
 				VerticalOptions = LayoutOptions.CenterAndExpand,
-				IsEnabled = false
+				IsEnabled = false,
+				Style = Styles.buttonStyle
 			};
 
 			_btnOk.Clicked += OnButtonClicked;
 
 			var locationLbl = new Label {
-				Text = "Set your location",
-				HorizontalOptions = LayoutOptions.StartAndExpand
+				Text = "Your location",
+				HorizontalOptions = LayoutOptions.Center,
+				VerticalOptions = LayoutOptions.CenterAndExpand
 			};
 
 			_locationEntry = new Entry {
 				Placeholder = "Search",
-				HorizontalOptions = LayoutOptions.StartAndExpand
+				HorizontalOptions = LayoutOptions.Center,
+				VerticalOptions = LayoutOptions.CenterAndExpand
 			};
 
 			_locationEntry.TextChanged += OnTextChanged;
 
 			_locationResultList = new ListView {
-				HorizontalOptions = LayoutOptions.StartAndExpand
+				HorizontalOptions = LayoutOptions.Center,
+				VerticalOptions = LayoutOptions.CenterAndExpand,
+				Header = "Location",
+				ItemTemplate = new DataTemplate (typeof(TextCell)) {
+					Bindings = {
+						{TextCell.TextProperty, new Binding ("Name")}
+					}
+				}
 			};
 
 			_locationResultList.ItemSelected += OnItemSelected;
@@ -98,19 +117,19 @@ namespace SunBurn
 		}
 
 		void OnItemSelected(object sender, SelectedItemChangedEventArgs e){
-			var seleced = (KeyValuePair<string, Tuple<double, double>>)e.SelectedItem;
-			_locationEntry.Text = seleced.Key;
+			var selected = (LocationListItem)e.SelectedItem;
+			_locationEntry.Text = selected.Name;
 		}
 
-		void OnTextChanged(object sender, TextChangedEventArgs e) {
+		async void OnTextChanged(object sender, TextChangedEventArgs e) {
 			if(_locationEntry.Text.Length > 2){
 				// search using entered location
-				var result = _dataService.GetPositionForLocation(_locationEntry.Text).Result;
+				var result = await _dataService.GetPositionForLocation(_locationEntry.Text);
 
 				var locations = new Dictionary<string, Tuple<double, double>> ();
 				locations.Add (_currentLocation.Name, new Tuple<double, double>(_currentLocation.Position.Latitude, _currentLocation.Position.Longitude));
 				foreach (var position in result.results) {
-					var name = position.address_components.First (a => a.types.Contains ("administrative_area_level_2") || a.types.Contains ("administrative_area_level_1")).long_name;
+					var name = FormatterHelper.FormatAddress (position);
 					if (!locations.ContainsKey(name))
 						locations.Add (name, new Tuple<double, double> ((double)position.geometry.location.lat, (double)position.geometry.location.lng));
 				}
@@ -121,12 +140,12 @@ namespace SunBurn
 		void OnButtonClicked(object sender, EventArgs e)
 		{
 			Settings.SkinTypeSetting = _skinTypes [_picker.Items [_picker.SelectedIndex]];
-			var selectedLocation = (KeyValuePair<string, Tuple<double, double>>)_locationResultList.SelectedItem;
-			Settings.LocationName = selectedLocation.Key;
+			var selectedLocation = (LocationListItem)_locationResultList.SelectedItem;
+			Settings.LocationName = selectedLocation.Name;
 			Settings.Position = new BLL.Position () {
 				Altitude = 0,
-				Latitude = _locationResults [selectedLocation.Key].Item1,
-				Longitude = _locationResults [selectedLocation.Key].Item2
+				Latitude = selectedLocation.Position.Item1,
+				Longitude = selectedLocation.Position.Item2
 			};
 			Navigation.PushAsync (new FrontPage (_locationService, _dataService));
 		}	

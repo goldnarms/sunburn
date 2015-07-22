@@ -1,8 +1,8 @@
-﻿using SunBurn;
+﻿using SunBurn.BLL;
 using Xamarin.Forms;
 
-[assembly:Dependency(typeof(SunBurn.WP81.Services.DeviceService))]
-namespace SunBurn.WP81.Services
+//[assembly:Dependency(typeof(SunBurn.WP8.Services.DeviceService))]
+namespace SunBurn.WP8.Services
 {
 	public class DeviceService : IDeviceService{
 

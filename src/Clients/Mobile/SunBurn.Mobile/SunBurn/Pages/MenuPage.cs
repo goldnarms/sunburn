@@ -13,6 +13,7 @@ namespace SunBurn
 			Title = "menu";
 
 			Menu = new MenuListView ();
+
 			var menuLabel = new ContentView {
 				Padding = new Thickness(10, 36, 0, 5),
 				Content = new Label{

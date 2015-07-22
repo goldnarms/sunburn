@@ -1,14 +1,25 @@
 ﻿using System;
 using Xamarin.Forms;
+using SunBurn;
 
 [assembly:Dependency(typeof(SunBurn.IOS.Services.DeviceService))]
 namespace SunBurn.IOS.Services
 {
-	public class DeviceService: SunBurn.BLL.IDeviceService{
+	public class DeviceService: IDeviceService{
+
+		public DeviceService ()
+		{
+
+		}
 
 		public void SetupSettings(){
-			var settings = UINotificationsSettings.GetSettingsForTypes (UIUserNotificationType.Alert | UIUserNotificationType, null);
-			UIApplication.SharedApplication.RegisterUserNotificationSettings (settings);
+			UIUserNotificationType notificationTypes = UIUserNotificationType.Alert | 
+				UIUserNotificationType.Badge | 
+				UIUserNotificationType.Sound;
+
+			var userNoticationSettings = UIUserNotificationSettings.GetSettingsForTypes(notificationTypes, new NSSet(new string[] {}));
+
+			UIApplication.SharedApplication.RegisterUserNotificationSettings (userNoticationSettings);
 		}
 	}
 }

@@ -13,7 +13,21 @@ namespace SunBurn
 	public class FrontPage : CarouselPage
 	{
 		private FrontPageManager _manager;
+
+		public FrontPage ()
+		{
+			IsBusy = true;
+			var positionService = DependencyService.Get<IPositionService> ();
+			var dataService = new DataService ();
+			var locationService = new LocationService (positionService, dataService);
+			_manager = new FrontPageManager (locationService, dataService, new ExposureCalculator());
+			Init ();
+			IsBusy = false;
+		}
+
+
 		public FrontPage (ILocationService locationService, IDataService dataService){
+			IsBusy = true;
 			_manager = new FrontPageManager (locationService, dataService, new ExposureCalculator());
 			Init ();
 			IsBusy = false;
@@ -53,7 +67,7 @@ namespace SunBurn
 				Text = locationName,
 				VerticalOptions = LayoutOptions.Start,
 				HorizontalOptions = LayoutOptions.StartAndExpand,
-				FontSize = Device.GetNamedSize(NamedSize.Micro, typeof(Label))
+				Style = Styles.linkLabelStyle
 			};
 
 			var dateLbl = new Label {
@@ -80,7 +94,8 @@ namespace SunBurn
 				},
 				Orientation = StackOrientation.Horizontal,
 				VerticalOptions = LayoutOptions.CenterAndExpand,
-				Padding = new Thickness(0, 20)
+				Padding = new Thickness(0, 20),
+				Style = Styles.backgroundLayoutStyle
 			};
 
 			var sunBurnTable = new ListView {
@@ -110,12 +125,13 @@ namespace SunBurn
 				ItemTemplate = new DataTemplate(() => {
 					Label spfLbl = new Label{
 						HorizontalOptions = LayoutOptions.CenterAndExpand,
-
+						Style = Styles.infoLabelStyle
 					};
 					spfLbl.SetBinding(Label.TextProperty, "Spf");
 
 					Label timeLbl = new Label{
 						HorizontalOptions = LayoutOptions.CenterAndExpand,
+						Style = Styles.infoLabelStyle
 					};
 					timeLbl.SetBinding(Label.TextProperty, "Time");
 

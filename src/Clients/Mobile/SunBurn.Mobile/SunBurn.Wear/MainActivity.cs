@@ -11,6 +11,7 @@ using Android.Widget;
 using SunBurn.BLL;
 using Android.Hardware;
 using System.Linq;
+using SunBurn;
 
 namespace SunBurn.Wear
 {

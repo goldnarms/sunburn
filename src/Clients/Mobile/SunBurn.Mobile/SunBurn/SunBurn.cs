@@ -17,11 +17,6 @@ namespace SunBurn
 
 		protected override void OnStart ()
 		{
-			var deviceService = DependencyService.Get<IDeviceService> ();
-			deviceService.SetupSettings ();
-			//var locationManager = S
-			// Handle when your app starts
-
 		}
 
 		protected override void OnSleep ()
@@ -35,6 +30,8 @@ namespace SunBurn
 		}
 
 		private void AppStart(){
+			var deviceService = DependencyService.Get<IDeviceService> ();
+			//deviceService.SetupSettings ();
 				
 			page = MainPage = new RootPage ();
 

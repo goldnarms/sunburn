@@ -1,8 +1,7 @@
 ﻿using System;
 using Xamarin.Forms;
-using SunBurn;
+using SunBurn.BLL;
 
-[assembly:Dependency(typeof(SunBurn.Droid.Services.DeviceService))]
 namespace SunBurn.Droid.Services
 {
 	public class DeviceService: IDeviceService{

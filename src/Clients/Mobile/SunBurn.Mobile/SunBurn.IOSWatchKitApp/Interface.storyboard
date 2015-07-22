@@ -8,7 +8,34 @@
         <!--Interface Controller-->
         <scene sceneID="aou-V4-d1y">
             <objects>
-                <controller id="AgC-eL-Hgc" customClass="InterfaceController" customModuleProvider=""/>
+                <controller id="AgC-eL-Hgc" customClass="InterfaceController" customModuleProvider="">
+                    <items>
+                        <label alignment="left" id="2" text="location" minimumScaleFactor="0.5">
+                            <color key="textColor" colorSpace="calibratedRGB" red="0" green="0" blue="1" alpha="1"/>
+                        </label>
+                        <group width="1" alignment="left" id="4">
+                            <items>
+                                <label alignment="left" text="UV Index:" id="3"/>
+                                <label alignment="left" text="Label" id="7"/>
+                            </items>
+                        </group>
+                        <group width="1" alignment="left" id="10">
+                            <items>
+                                <label alignment="left" id="8" text="SPF:"/>
+                                <label alignment="left" text="Label" id="9"/>
+                            </items>
+                        </group>
+                        <slider width="1" alignment="left" value="0.0" steps="4" id="11" maximum="4"/>
+                        <timer alignment="left" id="12"/>
+                        <button width="1" alignment="left" title="Button" id="13"/>
+                    </items>
+                    <connections>
+                        <outlet property="lblLocation" destination="2" id="name-outlet-2"/>
+                        <outlet property="lblUvIndex" destination="7" id="name-outlet-7"/>
+                        <outlet property="lblSpf" destination="9" id="name-outlet-9"/>
+                        <outlet property="btnStartTimer" destination="13" id="name-outlet-13"/>
+                    </connections>
+                </controller>
             </objects>
             <point key="canvasLocation" x="0.0" y="0.0"/>
         </scene>
