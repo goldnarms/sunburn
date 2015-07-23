@@ -7,12 +7,19 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Threading;
 using System.Linq;
+using Microsoft.Band.Portable;
+using Microsoft.Band.Portable.Tiles;
+using Microsoft.Band.Portable.Tiles.Pages;
+using Microsoft.Band.Portable.Tiles.Pages.Data;
+using Microsoft.Band.Portable.Sensors;
 
 namespace SunBurn
 {
 	public class FrontPage : CarouselPage
 	{
 		private FrontPageManager _manager;
+		private double _uvIndex;
+		private Label _uvIndexLbl;
 
 		public FrontPage ()
 		{
@@ -58,8 +65,98 @@ namespace SunBurn
 						}
 					}
 				}));
-				this.DisplayAlert ("Error", ex.Message, "Ok");
+				await this.DisplayAlert ("Error", ex.Message, "Ok");
 			}
+		}
+
+		private async Task ConnectToMsBand(){
+			var bandClientManager = BandClientManager.Instance;
+			var devices = await bandClientManager.GetPairedBandsAsync ();
+			var bandInfo = devices.FirstOrDefault ();
+			if (bandInfo != null) {
+				var bandClient = await bandClientManager.ConnectAsync (bandInfo);
+				await SetupTilesForBand (bandClient);
+			}
+		}
+
+		private async Task SetupTilesForBand(BandClient bandClient){
+			var tileManager = bandClient.TileManager;
+			var tileId = Guid.NewGuid ();
+			short tId = 1;
+			short buttonId = 2;
+			short imageId = 3;
+			var pageId = Guid.NewGuid();
+			//var tiles = await tileManager.GetTilesAsync ();
+			var availableTiles = await tileManager.GetRemainingTileCapacityAsync ();
+			if (availableTiles > 0) {
+				var tile = new BandTile (tileId) {
+					//Icon = "",
+					Name = "SunBurn",
+					//SmallIcon = ""
+				};
+
+				var pageLayout = new PageLayout {
+					Root = new ScrollFlowPanel {
+						Rect = new PageRect(new PagePoint(0, 0), new PageSize(245, 105)),
+						Orientation = FlowPanelOrientation.Vertical,
+						Elements = {
+							new TextBlock{
+								ElementId = tId,
+								Rect = new PageRect(new PagePoint(0, 0), new PageSize(229, 30)),
+								ColorSource = ElementColorSource.BandBase,
+								HorizontalAlignment = HorizontalAlignment.Left,
+								VerticalAlignment = VerticalAlignment.Top
+							},
+							new TextButton {
+								ElementId = buttonId,
+								Rect = new PageRect(new PagePoint(0, 0), new PageSize(229, 43)),
+								PressedColor = new BandColor(0, 127, 0)
+							},
+							new Microsoft.Band.Portable.Tiles.Pages.Icon {
+								ElementId = imageId,
+								Rect = new PageRect(new PagePoint(0, 0), new PageSize(229, 46)),
+								Color = new BandColor(127, 127, 0),
+								VerticalAlignment = VerticalAlignment.Center,
+								HorizontalAlignment = HorizontalAlignment.Center
+							}
+						}
+					}
+				};
+
+				tile.PageLayouts.Add (pageLayout);
+
+				await tileManager.AddTileAsync (tile);
+
+				var pageData = new PageData {
+					PageId = pageId,
+					PageLayoutIndex = 0,
+					Data = {
+						new TextBlockData {
+							ElementId = tId,
+							Text = "UvIndex"
+						},
+						new TextButtonData {
+							ElementId = buttonId,
+							Text = "StartTimer"
+						},
+						new ImageData {
+							ElementId = imageId,
+							ImageIndex = 0
+						}
+					}
+				};
+				// apply the data to the tile
+				await tileManager.SetTilePageDataAsync(tileId, pageData);
+			}
+		}
+
+		private async void ConnectToBandSensors(BandClient bandClient){
+			var sensorManager = bandClient.SensorManager;
+			var uvSensor = sensorManager.UltravioletLight;
+			uvSensor.ReadingChanged += (o, args) => {
+				var bandUvIndex = args.SensorReading.Level;
+			};
+			await uvSensor.StartReadingsAsync (BandSensorSampleRate.Ms128);
 		}
 
 		private ContentPage BuildContent(string locationName, string time, SunburnResult sunburnResult){
@@ -78,6 +175,13 @@ namespace SunBurn
 
 			};
 
+			_uvIndexLbl = new Label {
+				Text = _uvIndex.ToString(),
+				HorizontalOptions = LayoutOptions.StartAndExpand,
+				VerticalOptions = LayoutOptions.CenterAndExpand,
+				FontSize = 96
+			};
+
 			var uvLayout = new StackLayout {
 				Children = {
 					new Label {
@@ -85,12 +189,7 @@ namespace SunBurn
 						HorizontalOptions = LayoutOptions.EndAndExpand,
 						VerticalOptions = LayoutOptions.CenterAndExpand
 					},
-					new Label {
-						Text = sunburnResult.UvIndex.ToString(),
-						HorizontalOptions = LayoutOptions.StartAndExpand,
-						VerticalOptions = LayoutOptions.CenterAndExpand,
-						FontSize = 96
-					}
+					_uvIndexLbl
 				},
 				Orientation = StackOrientation.Horizontal,
 				VerticalOptions = LayoutOptions.CenterAndExpand,

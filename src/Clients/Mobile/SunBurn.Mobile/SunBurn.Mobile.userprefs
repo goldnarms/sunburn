@@ -1,10 +1,10 @@
 ﻿<Properties StartupItem="Droid/SunBurn.Droid.csproj">
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.IPhone.IPhoneSimulatorTarget.IPhone5s.8.3" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="SunBurn/Helpers/FormatterHelper.cs">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Android.Nexus 4 (KitKat)" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="SunBurn/Pages/FrontPage.cs">
     <Files>
       <File FileName="SunBurn.BLL/Services/SunburnTimerService.cs" Line="1" Column="1" />
       <File FileName="SunBurn.IOS/Services/PositionService.IOS.cs" Line="1" Column="1" />
-      <File FileName="SunBurn.Wear/MainActivity.cs" Line="100" Column="22" />
+      <File FileName="SunBurn.Wear/MainActivity.cs" Line="1" Column="1" />
       <File FileName="SunBurn.BLL/Services/UvIndexService.cs" Line="1" Column="1" />
       <File FileName="SunBurn.BLL/Services/LocationService.cs" Line="1" Column="1" />
       <File FileName="SunBurn.BLL/Services/DataService.cs" Line="1" Column="1" />
@@ -17,14 +17,14 @@
       <File FileName="SunBurn.BLL/Interfaces/IExposureCalculator.cs" Line="1" Column="1" />
       <File FileName="SunBurn.BLL/Calculators/ExposureCalculator.cs" Line="1" Column="1" />
       <File FileName="Droid/MainActivity.cs" Line="1" Column="1" />
-      <File FileName="SunBurn/Pages/FrontPage.cs" Line="126" Column="1" />
+      <File FileName="SunBurn/Pages/FrontPage.cs" Line="84" Column="5" />
       <File FileName="SunBurn/Pages/InitPage.cs" Line="1" Column="1" />
       <File FileName="SunBurn.Wear/Resources/values/Strings.xml" Line="1" Column="1" />
       <File FileName="SunBurn/Pages/MenuPage.cs" Line="1" Column="1" />
       <File FileName="SunBurn/Pages/RootPage.cs" Line="1" Column="1" />
-      <File FileName="SunBurn/Pages/SettingsPage.cs" Line="133" Column="6" />
+      <File FileName="SunBurn/Pages/SettingsPage.cs" Line="106" Column="53" />
       <File FileName="SunBurn.BLL/Types/SunburnTimerInfoArgs.cs" Line="1" Column="1" />
-      <File FileName="SunBurn/Managers/FrontPageManager.cs" Line="35" Column="114" />
+      <File FileName="SunBurn/Managers/FrontPageManager.cs" Line="1" Column="1" />
       <File FileName="SunBurn.IOSWatchKitApp/Info.plist" />
       <File FileName="SunBurn.IOSWatchKitExtension/PushNotificationPayload.json" Line="1" Column="1" />
       <File FileName="SunBurn.IOSWatchKitExtension/NotificationController.cs" Line="1" Column="1" />
@@ -52,22 +52,18 @@
       <File FileName="SunBurn.WP8/README_FIRST.txt" Line="1" Column="1" />
       <File FileName="SunBurn.WP81/Services/PositionService.WP81.cs" Line="1" Column="1" />
       <File FileName="SunBurn/Models/LocationListItem.cs" Line="1" Column="1" />
-      <File FileName="SunBurn/Helpers/FormatterHelper.cs" Line="19" Column="2" />
+      <File FileName="SunBurn/Helpers/FormatterHelper.cs" Line="1" Column="1" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State name="__root__">
           <Node name="SunBurn.Mobile" expanded="True">
             <Node name="SunBurn" expanded="True">
-              <Node name="Helpers" expanded="True">
-                <Node name="FormatterHelper.cs" selected="True" />
+              <Node name="Packages" expanded="True" />
+              <Node name="Pages" expanded="True">
+                <Node name="FrontPage.cs" selected="True" />
               </Node>
-              <Node name="Managers" expanded="True" />
-              <Node name="Models" expanded="True" />
-              <Node name="Pages" expanded="True" />
             </Node>
-            <Node name="SunBurn.Droid" expanded="True" />
-            <Node name="SunBurn.Wear" expanded="True" />
           </Node>
         </State>
       </Pad>
@@ -82,6 +78,7 @@
     <BreakpointStore>
       <Breakpoint file="/Users/arnsteinjohansen/Documents/sunburn/src/Clients/Mobile/SunBurn.Mobile/SunBurn.IOS/Services/LocationMngr.IOS.cs" line="15" column="1" />
       <Breakpoint file="/Users/arnsteinjohansen/Documents/sunburn/src/Clients/Mobile/SunBurn.Mobile/SunBurn.IOS/Services/DeviceService.IOS.cs" line="12" column="17" />
+      <Breakpoint file="/Users/arnsteinjohansen/Documents/sunburn/src/Clients/Mobile/SunBurn.Mobile/SunBurn/Pages/RootPage.cs" line="11" column="1" />
     </BreakpointStore>
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />

@@ -20,7 +20,7 @@ namespace SunBurn
 				
 			// Check if user has set skin type
 			if(Settings.SkinTypeSetting == SkinType.NotSet)
-				Detail = new NavigationPage (new InitPage(locationService, dataService));
+				Detail = new NavigationPage (new SettingsPage(locationService, dataService));
 			else
 				Detail = new NavigationPage (new FrontPage(locationService, dataService));
 		}

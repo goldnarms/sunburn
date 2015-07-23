@@ -103,7 +103,7 @@ namespace SunBurn
 				Header = "Location",
 				ItemTemplate = new DataTemplate (typeof(TextCell)) {
 					Bindings = {
-						{TextCell.TextProperty, new Binding ("Name")}
+						{ TextCell.TextProperty, new Binding ("Name") }
 					}
 				}
 			};
