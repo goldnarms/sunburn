@@ -2,22 +2,19 @@ using System;
 using Xamarin.Forms;
 using SunBurn.Managers;
 using SunBurn.Calculators;
+using SunBurn.BLL;
 using System.Collections;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Threading;
 using System.Linq;
-using Microsoft.Band.Portable;
-using Microsoft.Band.Portable.Tiles;
-using Microsoft.Band.Portable.Tiles.Pages;
-using Microsoft.Band.Portable.Tiles.Pages.Data;
-using Microsoft.Band.Portable.Sensors;
 
 namespace SunBurn
 {
 	public class FrontPage : CarouselPage
 	{
 		private FrontPageManager _manager;
+		private BandService _bandService;
 		private double _uvIndex;
 		private Label _uvIndexLbl;
 
@@ -44,7 +41,10 @@ namespace SunBurn
 			var location = _manager.GetCurrentLocation ();
 			try {
 				var result = await _manager.GetResult (location);
-				
+				if(_bandService.HasDevice){
+					_bandService.UpdateTile(result.SunburnResults.First().Value);
+				}
+
 				foreach (var page in result.SunburnResults.Select (sr => BuildContent (result.Location, sr.Key, sr.Value))) {
 					Children.Add (page);
 				};
@@ -65,98 +65,13 @@ namespace SunBurn
 						}
 					}
 				}));
-				await this.DisplayAlert ("Error", ex.Message, "Ok");
+				this.DisplayAlert ("Error", ex.Message, "Ok");
 			}
 		}
 
 		private async Task ConnectToMsBand(){
-			var bandClientManager = BandClientManager.Instance;
-			var devices = await bandClientManager.GetPairedBandsAsync ();
-			var bandInfo = devices.FirstOrDefault ();
-			if (bandInfo != null) {
-				var bandClient = await bandClientManager.ConnectAsync (bandInfo);
-				await SetupTilesForBand (bandClient);
-			}
-		}
-
-		private async Task SetupTilesForBand(BandClient bandClient){
-			var tileManager = bandClient.TileManager;
-			var tileId = Guid.NewGuid ();
-			short tId = 1;
-			short buttonId = 2;
-			short imageId = 3;
-			var pageId = Guid.NewGuid();
-			//var tiles = await tileManager.GetTilesAsync ();
-			var availableTiles = await tileManager.GetRemainingTileCapacityAsync ();
-			if (availableTiles > 0) {
-				var tile = new BandTile (tileId) {
-					//Icon = "",
-					Name = "SunBurn",
-					//SmallIcon = ""
-				};
-
-				var pageLayout = new PageLayout {
-					Root = new ScrollFlowPanel {
-						Rect = new PageRect(new PagePoint(0, 0), new PageSize(245, 105)),
-						Orientation = FlowPanelOrientation.Vertical,
-						Elements = {
-							new TextBlock{
-								ElementId = tId,
-								Rect = new PageRect(new PagePoint(0, 0), new PageSize(229, 30)),
-								ColorSource = ElementColorSource.BandBase,
-								HorizontalAlignment = HorizontalAlignment.Left,
-								VerticalAlignment = VerticalAlignment.Top
-							},
-							new TextButton {
-								ElementId = buttonId,
-								Rect = new PageRect(new PagePoint(0, 0), new PageSize(229, 43)),
-								PressedColor = new BandColor(0, 127, 0)
-							},
-							new Microsoft.Band.Portable.Tiles.Pages.Icon {
-								ElementId = imageId,
-								Rect = new PageRect(new PagePoint(0, 0), new PageSize(229, 46)),
-								Color = new BandColor(127, 127, 0),
-								VerticalAlignment = VerticalAlignment.Center,
-								HorizontalAlignment = HorizontalAlignment.Center
-							}
-						}
-					}
-				};
-
-				tile.PageLayouts.Add (pageLayout);
-
-				await tileManager.AddTileAsync (tile);
-
-				var pageData = new PageData {
-					PageId = pageId,
-					PageLayoutIndex = 0,
-					Data = {
-						new TextBlockData {
-							ElementId = tId,
-							Text = "UvIndex"
-						},
-						new TextButtonData {
-							ElementId = buttonId,
-							Text = "StartTimer"
-						},
-						new ImageData {
-							ElementId = imageId,
-							ImageIndex = 0
-						}
-					}
-				};
-				// apply the data to the tile
-				await tileManager.SetTilePageDataAsync(tileId, pageData);
-			}
-		}
-
-		private async void ConnectToBandSensors(BandClient bandClient){
-			var sensorManager = bandClient.SensorManager;
-			var uvSensor = sensorManager.UltravioletLight;
-			uvSensor.ReadingChanged += (o, args) => {
-				var bandUvIndex = args.SensorReading.Level;
-			};
-			await uvSensor.StartReadingsAsync (BandSensorSampleRate.Ms128);
+			_bandService = new BandService ();
+			await _bandService.SetupDevice ();
 		}
 
 		private ContentPage BuildContent(string locationName, string time, SunburnResult sunburnResult){
