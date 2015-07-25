@@ -1,12 +1,40 @@
-﻿<Properties StartupItem="Droid\SunBurn.Droid.csproj">
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Android.SelectDevice" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="SunBurn.BLL\Services\BandService.cs">
+﻿<Properties StartupItem="SunBurn/SunBurn.csproj">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="SunBurn/Pages/SettingsPage.cs">
     <Files>
-      <File FileName="SunBurn.BLL\Interfaces\IExtraDeviceService.cs" Line="1" Column="1" />
-      <File FileName="SunBurn.BLL\Services\BandService.cs" Line="51" Column="1" />
-      <File FileName="SunBurn\Pages\FrontPage.cs" Line="1" Column="1" />
-      <File FileName="SunBurn.BLL\Interfaces\IBandService.cs" Line="1" Column="1" />
+      <File FileName="SunBurn/ViewModels/HomeViewModel.cs" Line="49" Column="2" />
+      <File FileName="SunBurn.BLL/Services/BandService.cs" Line="12" Column="34" />
+      <File FileName="SunBurn.BLL/Interfaces/IBandService.cs" Line="8" Column="23" />
+      <File FileName="SunBurn/Pages/HomePage.cs" Line="44" Column="43" />
+      <File FileName="SunBurn/Settings.cs" Line="60" Column="58" />
+      <File FileName="SunBurn/Pages/SettingsPage.cs" Line="135" Column="26" />
     </Files>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State name="__root__">
+          <Node name="SunBurn.Mobile" expanded="True">
+            <Node name="SunBurn" expanded="True">
+              <Node name="Pages" expanded="True">
+                <Node name="SettingsPage.cs" selected="True" />
+              </Node>
+              <Node name="ViewModels" expanded="True" />
+            </Node>
+            <Node name="SunBurn.BLL" expanded="True">
+              <Node name="Interfaces" expanded="True" />
+              <Node name="Services" expanded="True" />
+            </Node>
+            <Node name="SunBurn.Droid" expanded="True" />
+            <Node name="SunBurn.IOS" expanded="True" />
+            <Node name="SunBurn.Wear" expanded="True" />
+          </Node>
+        </State>
+      </Pad>
+      <Pad Id="MonoDevelop.NUnit.TestPad">
+        <State name="__root__">
+          <Node name="SunBurn.Mobile" expanded="True" selected="True" />
+        </State>
+      </Pad>
+    </Pads>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore>

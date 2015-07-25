@@ -18,9 +18,13 @@ namespace SunBurn
 		private double _uvIndex;
 		private Label _uvIndexLbl;
 
+		private HomeViewModel ViewModel{
+			get{ return BindingContext as HomeViewModel;}
+		}
+
 		public HomePage ()
 		{
-			//BindingContext = new HomeViewModel ();
+			BindingContext = new HomeViewModel ();
 			IsBusy = true;
 			var positionService = DependencyService.Get<IPositionService> ();
 			var dataService = new DataService ();
@@ -30,6 +34,15 @@ namespace SunBurn
 			IsBusy = false;
 		}
 
+		protected override void OnAppearing ()
+		{
+			base.OnAppearing ();
+
+			if (ViewModel == null || !ViewModel.CanLoadMore || ViewModel.IsBusy)
+				return;
+
+			ViewModel.ConnectToBand.Execute (null);
+		}
 
 		public HomePage (ILocationService locationService, IDataService dataService){
 			IsBusy = true;

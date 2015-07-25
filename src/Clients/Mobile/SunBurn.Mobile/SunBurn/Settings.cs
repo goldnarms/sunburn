@@ -54,6 +54,15 @@ namespace SunBurn
 				AppSettings.AddOrUpdateValue ("loc_name", value);
 			}
 		}
+
+		public static bool PreferCelcius{
+			get{
+				return AppSettings.GetValueOrDefault<bool> ("prefer_celcius", false);
+			}
+			set{
+				AppSettings.AddOrUpdateValue ("prefer_celcius", value);
+			}
+		}
 	}
 }
 

@@ -18,6 +18,7 @@ namespace SunBurn
 		private IDataService _dataService;
 		private Entry _locationEntry;
 		private BLL.UserLocation _currentLocation;
+		private Switch _swCelcius;
 
 		public SettingsPage ()
 		{
@@ -108,12 +109,30 @@ namespace SunBurn
 				}
 			};
 
+			var celciusLbl = new Label {
+				Text = "Use celcius: ",
+				HorizontalOptions = LayoutOptions.Center,
+				VerticalOptions = LayoutOptions.CenterAndExpand,
+
+			};
+
+			_swCelcius = new Switch {
+				HorizontalOptions = LayoutOptions.Center,
+				VerticalOptions = LayoutOptions.CenterAndExpand,
+			};
+
+			_swCelcius.IsToggled = Settings.PreferCelcius;
+
 			_locationResultList.ItemSelected += OnItemSelected;
 			return new StackLayout{
 				Children = {label, _picker, locationLbl, _locationEntry, _locationResultList, _btnOk},
 				VerticalOptions = LayoutOptions.CenterAndExpand,
 				HorizontalOptions = LayoutOptions.StartAndExpand
 			};
+		}
+
+		void Metric_Toggled(object sender, ToggledEventArgs args){
+			Settings.PreferCelcius = args.Value;
 		}
 
 		void OnItemSelected(object sender, SelectedItemChangedEventArgs e){
