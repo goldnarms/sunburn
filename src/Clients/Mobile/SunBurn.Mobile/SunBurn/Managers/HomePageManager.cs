@@ -6,13 +6,13 @@ using System.Threading.Tasks;
 
 namespace SunBurn.Managers
 {
-	public class FrontPageManager
+	public class HomePageManager
 	{
 		private ILocationService _locationService;
 		private IDataService _dataService;
 		private IExposureCalculator _exposureCalculator;
 		private List<int> _sunProtectionFactors = new List<int>{0, 15, 30, 50};
-		public FrontPageManager (ILocationService locationService, IDataService dataService, IExposureCalculator exposureCalculator)
+		public HomePageManager (ILocationService locationService, IDataService dataService, IExposureCalculator exposureCalculator)
 		{
 			_locationService = locationService;
 			_dataService = dataService;

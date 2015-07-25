@@ -22,7 +22,7 @@ namespace SunBurn
 			if(Settings.SkinTypeSetting == SkinType.NotSet)
 				Detail = new NavigationPage (new SettingsPage(locationService, dataService));
 			else
-				Detail = new NavigationPage (new FrontPage(locationService, dataService));
+				Detail = new NavigationPage (new HomePage(locationService, dataService));
 		}
 
 		private void NavigateTo(MenuItem menuItem){

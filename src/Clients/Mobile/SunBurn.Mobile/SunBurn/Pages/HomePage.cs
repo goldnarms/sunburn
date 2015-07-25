@@ -11,28 +11,29 @@ using System.Linq;
 
 namespace SunBurn
 {
-	public class FrontPage : CarouselPage
+	public class HomePage : CarouselPage
 	{
-		private FrontPageManager _manager;
+		private HomePageManager _manager;
 		private BandService _bandService;
 		private double _uvIndex;
 		private Label _uvIndexLbl;
 
-		public FrontPage ()
+		public HomePage ()
 		{
+			//BindingContext = new HomeViewModel ();
 			IsBusy = true;
 			var positionService = DependencyService.Get<IPositionService> ();
 			var dataService = new DataService ();
 			var locationService = new LocationService (positionService, dataService);
-			_manager = new FrontPageManager (locationService, dataService, new ExposureCalculator());
+			_manager = new HomePageManager (locationService, dataService, new ExposureCalculator());
 			Init ();
 			IsBusy = false;
 		}
 
 
-		public FrontPage (ILocationService locationService, IDataService dataService){
+		public HomePage (ILocationService locationService, IDataService dataService){
 			IsBusy = true;
-			_manager = new FrontPageManager (locationService, dataService, new ExposureCalculator());
+			_manager = new HomePageManager (locationService, dataService, new ExposureCalculator());
 			Init ();
 			IsBusy = false;
 		}
@@ -42,7 +43,7 @@ namespace SunBurn
 			try {
 				var result = await _manager.GetResult (location);
 				if(_bandService.HasDevice){
-					_bandService.UpdateTile(result.SunburnResults.First().Value);
+					await _bandService.UpdateTile(result.SunburnResults.First().Value);
 				}
 
 				foreach (var page in result.SunburnResults.Select (sr => BuildContent (result.Location, sr.Key, sr.Value))) {

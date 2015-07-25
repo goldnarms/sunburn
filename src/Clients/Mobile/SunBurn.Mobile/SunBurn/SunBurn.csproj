@@ -33,8 +33,6 @@
   <ItemGroup>
     <Compile Include="SunBurn.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Pages\FrontPage.cs" />
-    <Compile Include="Managers\FrontPageManager.cs" />
     <Compile Include="Helpers\Settings.cs" />
     <Compile Include="Settings.cs" />
     <Compile Include="Pages\RootPage.cs" />
@@ -47,6 +45,10 @@
     <Compile Include="Helpers\Xinions.cs" />
     <Compile Include="Models\LocationListItem.cs" />
     <Compile Include="Helpers\FormatterHelper.cs" />
+    <Compile Include="ViewModels\HomeViewModel.cs" />
+    <Compile Include="ViewModels\BaseViewModel.cs" />
+    <Compile Include="Pages\HomePage.cs" />
+    <Compile Include="Managers\HomePageManager.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <Import Project="..\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets" Condition="Exists('..\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets')" />
@@ -98,6 +100,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Styles\" />
+    <Folder Include="ViewModels\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\SunBurn.BLL\SunBurn.BLL.csproj">

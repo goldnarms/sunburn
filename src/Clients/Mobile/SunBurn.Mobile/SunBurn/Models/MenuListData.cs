@@ -17,7 +17,7 @@ namespace SunBurn
 			this.Add (new MenuItem {
 				Title = "Frontpage",
 				IconSource = "",
-				TargetType = typeof(FrontPage)
+				TargetType = typeof(HomePage)
 			});
 		}
 	}

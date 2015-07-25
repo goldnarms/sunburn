@@ -147,7 +147,7 @@ namespace SunBurn
 				Latitude = selectedLocation.Position.Item1,
 				Longitude = selectedLocation.Position.Item2
 			};
-			Navigation.PushAsync (new FrontPage (_locationService, _dataService));
+			Navigation.PushAsync (new HomePage (_locationService, _dataService));
 		}	
 
 		void OnIndexChanged(object sender, EventArgs e){
